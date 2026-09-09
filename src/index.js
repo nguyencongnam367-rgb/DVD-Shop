@@ -18,23 +18,21 @@ app.set("view engine", "handlebars");
 
 app.set("views", path.join(__dirname, "resources", "views"));
 
-// Cho phép đọc dữ liệu từ form
 app.use(express.urlencoded({ extended: true }));
 
-// Cho phép sử dụng CSS
 app.use(express.static(path.join(__dirname, "public")));
 
-// Chuyển trang mặc định đến trang đăng nhập
 app.get("/", (req, res) => {
   res.redirect("/login");
 });
-
-// Hiển thị trang login
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
-// Nhận dữ liệu đăng nhập
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
 app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -43,6 +41,18 @@ app.post("/login", (req, res) => {
   console.log("Mật khẩu:", password);
 
   res.send("Đăng nhập thành công!");
+});
+
+app.post("/register", (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  console.log("Tên đăng nhập:", username);
+  console.log("Email:", email);
+  console.log("Mật khẩu:", password);
+
+  res.send("Đăng ký thành công!");
 });
 
 app.listen(PORT, () => {
