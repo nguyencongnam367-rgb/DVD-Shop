@@ -1,76 +1,27 @@
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng ký | DVD Shop</title>
-    <link rel="stylesheet" href="/css/app.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="Về trang chủ DVD Shop">
-        <img src="/image/logo.png" alt="DVD Shop" />
-      </a>
-      <a class="cart-link" href="/cart" aria-label="Mở giỏ hàng">
-        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-        <span>Giỏ hàng</span>
-      </a>
-    </header>
-
-    <main class="auth-page">
-      <div class="auth-container">
-
-        <h2>Đăng ký</h2>
-        <p class="auth-subtitle">Tạo tài khoản để bắt đầu mua sắm</p>
-
-        <form action="/register" method="POST">
-
-          <div class="form-group">
-            <label for="username">Tên đăng nhập</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Nhập tên đăng nhập"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Nhập email"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="password">Mật khẩu</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Nhập mật khẩu"
-              required
-            />
-          </div>
-
-          <button type="submit">Đăng ký</button>
-
-        </form>
-
-        <p>
-          Đã có tài khoản?
-          <a href="/login">Đăng nhập</a>
-        </p>
-
-      </div>
-    </main>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="register-page">
+  <h1>Register</h1>
+  <form action="../auth/register" method="POST">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Register</button>
+    <p>Đã có tài khoản? <a href="../auth/login">Đăng nhập ngay</a></p>
+  </form>
+</body>
 </html>
