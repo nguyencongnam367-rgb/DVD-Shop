@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">THE CINEMATIC COLLECTION.</h1>
+      <p class="hero-subtitle">Curated. Cult. Classic.</p>
+      <a href="#" class="btn-orange">EXPLORE NOW</a>
+    </div>
+  </section>
+
+  <main class="section-container">
+    <h2 class="section-title">FEATURED DVDS</h2>
+    
+    <div class="movie-grid">
+      {{#each products}}
+        <div class="movie-card">
+          <a href="/product/{{this._id}}">
+            <div class="poster-box">
+              <img src="{{this.image}}" alt="{{this.name}}">
+            </div>
+            <div class="movie-name">{{this.name}}</div>
+            <div class="movie-desc">{{this.director}}</div>
+            <div class="movie-price">{{formatVND this.price}}</div>
+          </a>
+          
+          <form action="/cart/add" method="POST">
+            <input type="hidden" name="productId" value="{{this._id}}">
+            <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
+          </form>
+        </div>
+      {{/each}}
+    </div>
+  </main>
+</body>
+</html>
