@@ -1,0 +1,621 @@
+<style>
+    .shop-shell {
+        min-height: calc(100vh - 52px);
+        background: linear-gradient(180deg, #fffaf7 0%, #f7f7f7 100%);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 18px 45px rgba(31, 31, 31, 0.06);
+    }
+
+    .shop-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 14px 18px;
+        background: #fff;
+        border: 1px solid #f1f1f1;
+        border-radius: 18px;
+        margin-bottom: 24px;
+    }
+
+    .shop-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .shop-brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #ff8f6b, #ee4d2d);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        box-shadow: 0 12px 22px rgba(238, 77, 45, 0.2);
+    }
+
+    .shop-brand-text {
+        font-weight: 800;
+        font-size: 1.05rem;
+    }
+
+    .shop-brand-text small {
+        display: block;
+        color: #7a7a7a;
+        font-size: 0.72rem;
+        font-weight: 500;
+    }
+
+    .shop-nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        color: #4b4b4b;
+        font-weight: 600;
+    }
+
+    .shop-nav a {
+        transition: color 0.2s ease;
+    }
+
+    .shop-nav a:hover {
+        color: #ee4d2d;
+    }
+
+    .shop-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .shop-search {
+        width: 280px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #f7f7f7;
+        border: 1px solid #ededed;
+        border-radius: 999px;
+        padding: 10px 14px;
+    }
+
+    .shop-search input {
+        border: none;
+        background: transparent;
+        outline: none;
+        flex: 1;
+        font-size: 0.92rem;
+    }
+
+    .icon-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        border: 1px solid #f0f0f0;
+        background: #fff;
+        color: #5f5f5f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .cart-badge {
+        position: absolute;
+        top: -6px;
+        right: -4px;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        background: #ee4d2d;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 0 4px;
+    }
+
+    .shop-banner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 20px;
+        margin-bottom: 28px;
+    }
+
+    .banner-main {
+        position: relative;
+        min-height: 260px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ffeddc, #ffe4dc 38%, #ffc1ad 100%);
+        padding: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .banner-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255,255,255,0.18);
+    }
+
+    .banner-content,
+    .banner-visual {
+        position: relative;
+        z-index: 1;
+    }
+
+    .banner-content h1 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+    }
+
+    .banner-content p {
+        margin: 0;
+        color: #5f4a42;
+        font-size: 1rem;
+        max-width: 430px;
+    }
+
+    .banner-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .tag {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.5);
+        border: 1px solid rgba(238, 77, 45, 0.15);
+        color: #56423c;
+        font-weight: 700;
+        font-size: 0.82rem;
+    }
+
+    .promo-card {
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        border-radius: 24px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 260px;
+    }
+
+    .promo-card .small-label {
+        display: inline-block;
+        width: fit-content;
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: #fff4ef;
+        color: #ee4d2d;
+        font-weight: 700;
+        font-size: 0.76rem;
+        margin-bottom: 18px;
+    }
+
+    .promo-card h3 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .promo-card p {
+        margin: 10px 0 0;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .promo-card button,
+    .cta-btn,
+    .primary-btn {
+        border: none;
+        border-radius: 12px;
+        padding: 12px 18px;
+        background: linear-gradient(135deg, #ff8f6b, #ee4d2d);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 12px 22px rgba(238, 77, 45, 0.2);
+    }
+
+    .cta-btn {
+        width: fit-content;
+        margin-top: 18px;
+    }
+
+    .category-row {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 26px;
+    }
+
+    .category-box {
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        border-radius: 18px;
+        padding: 18px 12px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        color: #444;
+        font-weight: 700;
+    }
+
+    .category-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        color: #fff;
+        background: linear-gradient(135deg, #ffb884, #ff7d50);
+    }
+
+    .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .section-link {
+        color: #ee4d2d;
+        font-weight: 700;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .product-card {
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        border-radius: 22px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 34px rgba(0,0,0,0.08);
+    }
+
+    .product-media {
+        height: 220px;
+        background: linear-gradient(135deg, #f6d5c8, #f3f3f3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.05) 100%);
+    }
+
+    .product-content {
+        padding: 16px;
+    }
+
+    .product-content .label {
+        display: inline-block;
+        background: #fff1ee;
+        color: #ee4d2d;
+        border-radius: 999px;
+        padding: 6px 8px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        margin: 0 0 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .product-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .price {
+        font-size: 1.14rem;
+        font-weight: 800;
+        color: #ee4d2d;
+    }
+
+    .rating {
+        color: #f6b400;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+
+    .product-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .small-btn {
+        border: 1px solid #ffddd5;
+        border-radius: 12px;
+        background: #fff;
+        color: #ee4d2d;
+        padding: 10px 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .small-btn.primary {
+        background: linear-gradient(135deg, #ff8f6b, #ee4d2d);
+        color: #fff;
+        border-color: transparent;
+    }
+
+    .info-strip {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .info-box {
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        border-radius: 18px;
+        padding: 18px;
+    }
+
+    .info-box h4 {
+        margin: 0 0 8px;
+    }
+
+    .info-box p {
+        margin: 0;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+        .shop-banner,
+        .product-grid,
+        .category-row,
+        .info-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 760px) {
+        .shop-shell {
+            padding: 16px;
+        }
+
+        .shop-header,
+        .shop-nav,
+        .shop-actions,
+        .shop-banner,
+        .category-row,
+        .product-grid,
+        .info-strip {
+            grid-template-columns: 1fr;
+            display: grid;
+        }
+
+        .shop-header {
+            padding: 16px;
+        }
+
+        .shop-search {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="shop-shell">
+    <header class="shop-header">
+        <div class="shop-brand">
+            <div class="shop-brand-mark">S</div>
+            <div class="shop-brand-text">
+                Shopee Mini
+                <small>Shop dành cho bạn</small>
+            </div>
+        </div>
+
+        <nav class="shop-nav">
+            <a href="#">Trang chủ</a>
+            <a href="#">Khuyến mãi</a>
+            <a href="#">Phim mới</a>
+            <a href="#">Bộ sưu tập</a>
+            <a href="#">Blog</a>
+        </nav>
+
+        <div class="shop-actions">
+            <div class="shop-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Tìm sản phẩm..." />
+            </div>
+            <button class="icon-btn">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+            <button class="icon-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge">3</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="shop-banner">
+        <div class="banner-main">
+            <div class="banner-content">
+                <div class="tag">Flash Sale DVD</div>
+                <h1>Khám phá bộ phim yêu thích</h1>
+                <p>Từ phim hành động, tình cảm đến anime và phim kinh điển, tất cả đều có ở cửa hàng DVD của chúng tôi với giá tốt mỗi ngày.</p>
+                <div class="banner-tags">
+                    <span class="tag">Giảm 40%</span>
+                    <span class="tag">Free ship</span>
+                    <span class="tag">Mới cập nhật</span>
+                </div>
+                <button class="cta-btn">Mua ngay</button>
+            </div>
+            <div class="banner-visual">
+                <div style="width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, #fff8f5, #ffe0d4); border: 12px solid rgba(255,255,255,0.5); display:flex; align-items:center; justify-content:center; font-size: 6rem; margin-left: auto; box-shadow: 0 18px 50px rgba(238,77,45,0.12);">🛍️</div>
+            </div>
+        </div>
+
+        <div class="promo-card">
+            <div>
+                <span class="small-label">Khuyến mãi đặc biệt</span>
+                <h3>Combo bộ phim hot</h3>
+                <p>Giảm thêm 10% cho đơn từ 500k và miễn phí giao hàng cho các bộ phim mới ra mắt.</p>
+            </div>
+            <button class="primary-btn">Xem ngay</button>
+        </div>
+    </section>
+
+    <section class="category-row">
+        <div class="category-box">
+            <div class="category-icon"><i class="fa-solid fa-film"></i></div>
+            <span>Phim hành động</span>
+        </div>
+        <div class="category-box">
+            <div class="category-icon" style="background: linear-gradient(135deg, #8dd5ff, #4aa6ff);"><i class="fa-solid fa-heart"></i></div>
+            <span>Phim tình cảm</span>
+        </div>
+        <div class="category-box">
+            <div class="category-icon" style="background: linear-gradient(135deg, #b0f0b0, #4cc76f);"><i class="fa-solid fa-robot"></i></div>
+            <span>Anime</span>
+        </div>
+        <div class="category-box">
+            <div class="category-icon" style="background: linear-gradient(135deg, #ffc77d, #ff9d42);"><i class="fa-solid fa-clapperboard"></i></div>
+            <span>Phim kinh điển</span>
+        </div>
+        <div class="category-box">
+            <div class="category-icon" style="background: linear-gradient(135deg, #a9c8ff, #729af2);"><i class="fa-solid fa-tv"></i></div>
+            <span>Phim gia đình</span>
+        </div>
+        <div class="category-box">
+            <div class="category-icon" style="background: linear-gradient(135deg, #fdaec8, #ff6fa8);"><i class="fa-solid fa-star"></i></div>
+            <span>Phim nổi bật</span>
+        </div>
+    </section>
+
+    <div class="section-head">
+        <h2 class="section-title">DVD nổi bật</h2>
+        <a class="section-link" href="#">Xem tất cả</a>
+    </div>
+
+    <section class="product-grid">
+        <article class="product-card">
+            <div class="product-media" style="background: linear-gradient(135deg, #f0f8ff, #d9ecff);"></div>
+            <div class="product-content">
+                <span class="label">Mới</span>
+                <h3 class="product-name">Dune: Part Two</h3>
+                <div class="product-meta">
+                    <span class="price">₫220.000</span>
+                    <span class="rating">★ 4.8</span>
+                </div>
+                <div class="product-actions">
+                    <button class="small-btn">Yêu thích</button>
+                    <button class="small-btn primary">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-media" style="background: linear-gradient(135deg, #fef1d8, #ffd39d);"></div>
+            <div class="product-content">
+                <span class="label">Bán chạy</span>
+                <h3 class="product-name">Spider-Man: Across the Spider-Verse</h3>
+                <div class="product-meta">
+                    <span class="price">₫240.000</span>
+                    <span class="rating">★ 4.9</span>
+                </div>
+                <div class="product-actions">
+                    <button class="small-btn">Yêu thích</button>
+                    <button class="small-btn primary">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-media" style="background: linear-gradient(135deg, #eafaf0, #d8f8df);"></div>
+            <div class="product-content">
+                <span class="label">Giảm 20%</span>
+                <h3 class="product-name">Your Name - Limited Edition</h3>
+                <div class="product-meta">
+                    <span class="price">₫180.000</span>
+                    <span class="rating">★ 4.7</span>
+                </div>
+                <div class="product-actions">
+                    <button class="small-btn">Yêu thích</button>
+                    <button class="small-btn primary">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-media" style="background: linear-gradient(135deg, #f5eaff, #e5d4ff);"></div>
+            <div class="product-content">
+                <span class="label">Nổi bật</span>
+                <h3 class="product-name">The Dark Knight Trilogy</h3>
+                <div class="product-meta">
+                    <span class="price">₫350.000</span>
+                    <span class="rating">★ 4.9</span>
+                </div>
+                <div class="product-actions">
+                    <button class="small-btn">Yêu thích</button>
+                    <button class="small-btn primary">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <div class="info-strip">
+        <div class="info-box">
+            <h4>🚚 Giao hàng nhanh</h4>
+            <p>Ship tận nơi trong 24h cho các đơn hàng trong thành phố.</p>
+        </div>
+        <div class="info-box">
+            <h4>💳 Thanh toán tiện lợi</h4>
+            <p>Hỗ trợ COD, chuyển khoản và ví điện tử.</p>
+        </div>
+        <div class="info-box">
+            <h4>🔒 Đổi trả linh hoạt</h4>
+            <p>Đổi trả trong 7 ngày nếu sản phẩm lỗi hoặc hỏng trong quá trình vận chuyển.</p>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,10 @@
 const express = require("express");
+const app = express();
+const port = 3000;
 const path = require("path");
 const { engine } = require("express-handlebars");
 
+<<<<<<< HEAD
 const app = express();
 const PORT = 3000;
 
@@ -76,9 +79,16 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
 
 app.use(express.urlencoded({ extended: true }));
+=======
+const route = require("./resources/Routers/index");
+>>>>>>> be132bbdf8c6f30e80b2152c6a6defa739258988
 
 app.use(express.static(path.join(__dirname, "public")));
+app.engine("hbs", engine({ extname: ".hbs" }));
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "resources/views"));
 
+<<<<<<< HEAD
 app.get("/", (req, res) => {
   res.render("home", { products });
 });
@@ -119,4 +129,9 @@ app.post("/register", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server chạy tại http://localhost:${PORT}`);
+=======
+route(app);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+>>>>>>> be132bbdf8c6f30e80b2152c6a6defa739258988
 });
