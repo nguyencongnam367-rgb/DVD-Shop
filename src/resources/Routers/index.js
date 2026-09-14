@@ -1,8 +1,15 @@
-const home = require('./homeRoutes'); //khai báo homeRoutes để gọi đến file homeRoutes.js
-const auth  = require('./authRoutes'); //khai báo authRoutes để gọi đến file authRoutes.js
+const home = require('./homeRoutes');
+const auth = require('./authRoutes');
+const cart = require('./cartRoutes');
+const product = require('./productRoutes');
+const quantri = require('./quantri');
 
 function Routes(app) {
-    app.use('/', home); // Sử dụng các route từ homeRoutes
-    app.use('/auth', auth); // Sử dụng các route từ authRoutes
+    app.use('/', home);
+    app.use('/auth', auth);
+    app.use('/cart', cart);
+    app.use('/product', product);
+    app.use('/products', product);
+    app.use('/', quantri);
 }
 module.exports = Routes;

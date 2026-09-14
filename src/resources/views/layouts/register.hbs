@@ -2,14 +2,19 @@
   <section class="auth-card">
     <div class="auth-header">
       <p class="auth-kicker">DVDShop</p>
-      <h1>Đăng nhập</h1>
-      <p class="auth-subtitle">Khám phá bộ sưu tập DVD mới, đặt hàng nhanh và nhận ưu đãi thành viên mỗi tuần.</p>
+      <h1>Tạo tài khoản</h1>
+      <p class="auth-subtitle">Đăng ký để theo dõi đơn hàng, lưu phim yêu thích và nhận ưu đãi đặc biệt cho khách hàng DVDShop.</p>
     </div>
 
-    <form action="/auth/login" method="POST" class="auth-form">
+    <form action="/auth/register" method="POST" class="auth-form">
       <div class="auth-field">
         <label for="username">Tên đăng nhập</label>
         <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+      </div>
+
+      <div class="auth-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
       </div>
 
       <div class="auth-field">
@@ -17,12 +22,12 @@
         <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
       </div>
 
-      <button type="submit" class="auth-submit">Đăng nhập</button>
+      <button type="submit" class="auth-submit">Đăng ký</button>
     </form>
 
     <p class="auth-switch">
-      Chưa có tài khoản?
-      <a href="/auth/register">Đăng ký ngay</a>
+      Đã có tài khoản?
+      <a href="/auth/login">Đăng nhập ngay</a>
     </p>
 
     <a href="/" class="auth-back">Về trang chủ</a>

@@ -1,18 +1,18 @@
 class QuanTriController {
   dashboard(req, res) {
-    res.render("home");
+    res.render("partials/QuanTri/home", { layout: "DashBoard" });
   }
 
   users(req, res) {
-    res.render("users");
+    res.render("partials/QuanTri/users", { layout: "DashBoard" });
   }
 
   products(req, res) {
-    res.render("products");
+    res.render("partials/QuanTri/products", { layout: "DashBoard" });
   }
 
   orders(req, res) {
-    res.render("orders");
+    res.render("partials/QuanTri/orders", { layout: "DashBoard" });
   }
 }
 

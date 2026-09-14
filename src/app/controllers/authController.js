@@ -1,6 +1,6 @@
 class AuthController {
   showLogin(req, res) {
-    res.render("login");
+    res.render("login", { layout: "main" });
   }
 
   login(req, res) {
@@ -8,7 +8,7 @@ class AuthController {
   }
 
   showRegister(req, res) {
-    res.render("register");
+    res.render("register", { layout: "main" });
   }
 
   register(req, res) {
