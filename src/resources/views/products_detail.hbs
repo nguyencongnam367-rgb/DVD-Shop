@@ -1,22 +1,26 @@
 <main class="product-detail section-container">
-	<a class="product-detail__back" href="/">&larr; Quay lại danh sách sản phẩm</a>
+  <a class="product-detail__back" href="/">&larr; Quay lại danh sách sản phẩm</a>
 
-	<section class="product-detail__content">
-		<div class="product-detail__image-wrap">
-			<img class="product-detail__image" src="{{product.image}}" alt="{{product.name}}">
-		</div>
+  <section class="product-detail__content">
+    <div class="product-detail__image-wrap">
+      <img
+        class="product-detail__image"
+        src="{{product.image}}"
+        alt="{{product.name}}"
+      />
+    </div>
 
-		<div class="product-detail__info">
-			<p class="product-detail__eyebrow">DVD COLLECTION</p>
-			<h1 class="product-detail__title">{{product.name}}</h1>
-			<p class="product-detail__director">Đạo diễn: {{product.director}}</p>
-			<p class="product-detail__description">{{product.description}}</p>
-			<p class="product-detail__price">{{formatVND product.price}}</p>
+    <div class="product-detail__info">
+      <p class="product-detail__eyebrow">DVD COLLECTION</p>
+      <h1 class="product-detail__title">{{product.name}}</h1>
+      <p class="product-detail__director">Đạo diễn: {{product.director}}</p>
+      <p class="product-detail__description">{{product.description}}</p>
+      <p class="product-detail__price">{{formatVND product.price}}</p>
 
-			<form action="/cart/add" method="POST">
-				<input type="hidden" name="productId" value="{{product._id}}">
-				<button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
-			</form>
-		</div>
-	</section>
+      <form action="/cart/add" method="POST">
+        <input type="hidden" name="productId" value="{{product._id}}" />
+        <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
+      </form>
+    </div>
+  </section>
 </main>

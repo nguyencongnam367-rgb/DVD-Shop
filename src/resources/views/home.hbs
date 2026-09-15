@@ -14,7 +14,7 @@
       <div class="movie-card">
         <a href="/product/{{this._id}}">
           <div class="poster-box">
-            <img src="{{this.image}}" alt="{{this.name}}">
+            <img src="{{this.image}}" alt="{{this.name}}" />
           </div>
           <div class="movie-name">{{this.name}}</div>
           <div class="movie-desc">{{this.director}}</div>
@@ -22,7 +22,7 @@
         </a>
 
         <form action="/cart/add" method="POST">
-          <input type="hidden" name="productId" value="{{this._id}}">
+          <input type="hidden" name="productId" value="{{this._id}}" />
           <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
         </form>
       </div>

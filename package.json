@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/index.js",
+    "dev:all": "npm run dev",
     "start": "node src/index.js"
   },
   "dependencies": {
