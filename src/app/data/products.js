@@ -71,16 +71,6 @@ const products = [
   },
   {
     _id: "8",
-    name: "Mad Max: Fury Road",
-    director: "George Miller",
-    price: 479000,
-    image:
-      "https://images.unsplash.com/photo-1518331647614-7a9f9bda9f8b?auto=format&fit=crop&w=800&q=80",
-    description:
-      "Max và Furiosa hợp sức trong cuộc truy đuổi nghẹt thở qua vùng đất hoang hậu tận thế để giành lấy tự do.",
-  },
-  {
-    _id: "9",
     name: "Whiplash",
     director: "Damien Chazelle",
     price: 389000,
@@ -88,16 +78,6 @@ const products = [
       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80",
     description:
       "Một tay trống trẻ theo đuổi sự hoàn hảo dưới sự huấn luyện khắc nghiệt của người thầy không chấp nhận giới hạn.",
-  },
-  {
-    _id: "10",
-    name: "The Grand Budapest Hotel",
-    director: "Wes Anderson",
-    price: 429000,
-    image:
-      "https://images.unsplash.com/photo-1440404653325-ab127d49abd3?auto=format&fit=crop&w=800&q=80",
-    description:
-      "Một quản lý khách sạn huyền thoại và người học việc bị cuốn vào cuộc phiêu lưu kỳ quặc xoay quanh một bức tranh quý.",
   },
 ];
 
