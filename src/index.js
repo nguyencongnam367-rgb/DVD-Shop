@@ -4,6 +4,8 @@ const { engine } = require("express-handlebars");
 
 const route = require("./resources/Routers/index");
 
+const db = require('./config');
+
 const app = express();
 const port = 3000;
 
