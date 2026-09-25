@@ -1,30 +1,26 @@
 <main class="product-detail section-container">
-  <a class="product-detail__back" href="/products">&larr; Quay lại danh sách sản
-    phẩm</a>
+  <a class="product-detail__back" href="/">&larr; Quay lại danh sách sản phẩm</a>
 
   <section class="product-detail__content">
     <div class="product-detail__image-wrap">
       <img
         class="product-detail__image"
-        src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80"
-        alt="The Dark Knight"
+        src="{{product.image}}"
+        alt="{{product.name}}"
       />
     </div>
 
     <div class="product-detail__info">
       <p class="product-detail__eyebrow">DVD COLLECTION</p>
-      <h1 class="product-detail__title">The Dark Knight</h1>
-      <p class="product-detail__director">Đạo diễn: Christopher Nolan</p>
+      <h1 class="product-detail__title">{{product.name}}</h1>
+      <p class="product-detail__director">Đạo diễn: {{product.director}}</p>
       <p class="product-detail__description">
-        Một trong những bộ phim siêu anh hùng được yêu thích nhất, kể về cuộc
-        đối đầu căng thẳng giữa Batman và Joker tại Gotham City. Bộ phim mang
-        đến cảm giác kịch tính, tối tăm và triết lý về sự vô đạo đức của quyền
-        lực.
+        {{product.description}}
       </p>
-      <p class="product-detail__price">499.000₫</p>
+      <p class="product-detail__price">{{formatVND product.price}}</p>
 
       <form action="/cart/add" method="POST">
-        <input type="hidden" name="productId" value="1" />
+        <input type="hidden" name="productId" value="{{product._id}}" />
         <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
       </form>
     </div>

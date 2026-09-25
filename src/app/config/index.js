@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const databaseUrl = "mongodb://127.0.0.1:27017/dvdshop";
+const databaseUrl = "mongodb://localhost:27017/dvdshop";
 
 async function connect() {
   try {

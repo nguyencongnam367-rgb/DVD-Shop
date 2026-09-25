@@ -4,7 +4,7 @@ const { engine } = require("express-handlebars");
 
 const route = require("./resources/Routers/index");
 
-const db = require('./config');
+const db = require("./app/config");
 
 const app = express();
 const port = 3000;
@@ -30,6 +30,10 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
 
 route(app);
+
+app.get("/favicon.ico", (req, res) => {
+  res.status(204).end();
+});
 
 app.use((req, res, next) => {
   const err = new Error("Không tìm thấy trang");

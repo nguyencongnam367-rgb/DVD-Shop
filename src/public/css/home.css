@@ -9,14 +9,20 @@
   box-sizing: border-box;
   font-family: var(--font-sans);
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #121212;
   color: #ffffff;
-  font-size: 15px;
+  font-size: clamp(14px, 1.6vw, 15px);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
 body a,
 body a:visited {
   text-decoration: none;
@@ -30,19 +36,18 @@ body a:visited {
   padding: 20px 5%;
   background-color: #121212;
 }
+
 .logo {
   font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1.1;
 }
+
 .logo span {
-  display: block;
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 4px;
   color: #888;
 }
+
 .nav-links {
   display: flex;
   gap: 25px;
@@ -51,13 +56,14 @@ body a:visited {
   font-weight: 500;
   color: #ccc;
 }
+
 .nav-links a:hover {
   color: #fff;
 }
 
 .hero {
   position: relative;
-  height: 380px;
+  min-height: clamp(18.75rem, 45vw, 26.875rem);
   background:
     linear-gradient(
       to right,
@@ -68,25 +74,29 @@ body a:visited {
       center/cover;
   display: flex;
   align-items: center;
-  padding: 0 5%;
+  padding: 2rem clamp(1.125rem, 5vw, 5rem);
 }
+
 .hero-content {
-  max-width: 500px;
+  max-width: min(100%, 500px);
 }
+
 .hero-title {
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
+
 .hero-subtitle {
   max-width: 40rem;
-  font-size: 0.98rem;
+  font-size: clamp(0.9rem, 1.6vw, 0.98rem);
   line-height: 1.7;
   color: var(--text-soft);
-  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
 }
+
 .btn-orange {
   background-color: #ff8c00;
   color: #fff;
@@ -99,13 +109,15 @@ body a:visited {
   cursor: pointer;
   display: inline-block;
 }
+
 .btn-red:hover {
   background-color: #b80710;
 }
 
 .section-container {
-  padding: 40px 5%;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 5%);
 }
+
 .section-title {
   font-size: 0.9rem;
   font-weight: 700;
@@ -118,7 +130,7 @@ body a:visited {
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 15px;
+  gap: 0.9375rem;
 }
 
 @media (max-width: 1200px) {
@@ -134,22 +146,48 @@ body a:visited {
 }
 
 @media (max-width: 640px) {
+  .hero {
+    min-height: 300px;
+    background-position: center center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
   .movie-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 }
 
 @media (max-width: 420px) {
+  .hero {
+    padding: 1.5rem 1.125rem;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
   .movie-grid {
     grid-template-columns: 1fr;
+  }
+
+  .movie-card {
+    padding: 10px;
+  }
+
+  .poster-box {
+    height: 220px;
   }
 }
 
 .movie-card {
   background: rgba(26, 26, 26, 0.96);
   border: 1px solid rgba(255, 140, 0, 0.2);
-  border-radius: 14px;
-  padding: 12px;
+  border-radius: 0.875rem;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -173,10 +211,10 @@ body a:visited {
 
 .poster-box {
   width: 100%;
-  height: 200px;
-  border-radius: 10px;
+  height: 12.5rem;
+  border-radius: 0.625rem;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
   background-color: #000;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -204,14 +242,14 @@ body a:visited {
 }
 
 .movie-desc {
-  margin-top: 4px;
+  margin-top: 0.25rem;
   font-size: 0.72rem;
   color: #c7c7c7;
   line-height: 1.5;
 }
 
 .movie-price {
-  margin-top: 8px;
+  margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #ff8c00;
   font-weight: 700;
@@ -219,15 +257,15 @@ body a:visited {
 
 .btn-add-cart {
   width: 100%;
-  margin-top: 12px;
-  padding: 10px 12px;
+  margin-top: 0.75rem;
+  padding: 0.625rem 0.75rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background: linear-gradient(135deg, #ff8c00, #ff4d00);
   color: #fff;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.05rem;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;

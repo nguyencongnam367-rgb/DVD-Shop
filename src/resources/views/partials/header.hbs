@@ -1,19 +1,26 @@
 <header class="main-header">
   <div class="header-container">
+    <div class="header-left">
+      <nav class="main-nav">
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button">Menu</button>
+          <div class="submenu" aria-label="submenu">
+            <a href="/">Trang chủ</a>
+            <a href="/products">Sản phẩm</a>
+            <a href="/cart">Giỏ hàng</a>
+            <a href="/admin/dashboard">Quản trị</a>
+          </div>
+        </div>
+      </nav>
+    </div>
 
-    <a href="/" class="logo">
+    <a href="/" class="logo" aria-label="DVDShop home">
       <span class="logo-icon"><img
           src="/image/logo.png"
           alt="DVDShop Logo"
         /></span>
       <span>DVD<span>Shop</span></span>
     </a>
-
-    <nav class="main-nav">
-      <a href="/">Trang chủ</a>
-      <a href="/products">Sản phẩm</a>
-      <a href="/cart">Giỏ hàng</a>
-    </nav>
 
     <div class="header-actions">
       <a href="/auth/login" class="login-btn">Đăng nhập</a>
