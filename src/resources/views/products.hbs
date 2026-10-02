@@ -1,17 +1,70 @@
-<main class="section-container">
-  <h2 class="section-title">Tất cả sản phẩm</h2>
-  <div class="movie-grid">
-    {{#each products}}
-      <div class="movie-card">
-        <a href="/product/{{this._id}}">
-          <div class="poster-box">
-            <img src="{{this.image}}" alt="{{this.name}}" />
-          </div>
-          <div class="movie-name">{{this.name}}</div>
-          <div class="movie-desc">{{this.director}}</div>
-          <div class="movie-price">{{formatVND this.price}}</div>
-        </a>
-      </div>
+<main class="pp">
+  <header class="pp-head">
+    <p class="pp-kicker">Bộ sưu tập</p>
+    <h1 class="pp-title">Tất cả sản phẩm</h1>
+    <p class="pp-count">{{total}} tựa phim</p>
+  </header>
+
+  <form class="pp-toolbar" method="GET" action="/products">
+    <label class="pp-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="search" name="q" value="{{q}}" placeholder="Tìm tên phim..." />
+    </label>
+    <select name="sort" class="pp-select" aria-label="Sắp xếp" onchange="this.form.submit()">
+      {{#each sortOptions}}
+      <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+      {{/each}}
+    </select>
+    {{#if cat}}<input type="hidden" name="cat" value="{{cat}}" />{{/if}}
+    <button type="submit" class="btn-solid pp-submit">Tìm</button>
+  </form>
+
+  <nav class="pp-chips" aria-label="Thể loại">
+    <a href="/products{{#if q}}?q={{q}}{{/if}}" class="pp-chip {{#if allActive}}is-active{{/if}}">Tất cả</a>
+    {{#each categories}}
+    <a href="/products?cat={{this._id}}{{#if ../q}}&q={{../q}}{{/if}}" class="pp-chip {{#if this.active}}is-active{{/if}}">{{this.name}}</a>
     {{/each}}
-  </div>
+  </nav>
+
+  <section class="pp-grid">
+    {{#each products}}
+    <article class="pp-card">
+      <div class="pp-card__media">
+        <a href="/product/{{this._id}}" class="pp-card__poster" aria-label="Xem {{this.name}}">
+          <img src="{{this.image}}" alt="{{this.name}}" loading="lazy" />
+        </a>
+
+        <div class="pp-card__overlay">
+          <button type="button" class="pp-icon-btn" aria-label="Yêu thích" title="Yêu thích">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <span class="pp-icon-sep">/</span>
+          <a href="/product/{{this._id}}" class="pp-icon-btn" aria-label="Xem nhanh" title="Xem nhanh">
+            <i class="fa-regular fa-eye"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="pp-card__body">
+        <h2 class="pp-card__name">
+          <a href="/product/{{this._id}}">{{this.name}}</a>
+        </h2>
+        <p class="pp-card__price">
+          {{#if this.discountPrice}}
+            {{formatVND this.discountPrice}} <s>{{formatVND this.price}}</s>
+          {{else}}
+            {{formatVND this.price}}
+          {{/if}}
+        </p>
+
+        <form action="/cart/add" method="POST" class="pp-card__form">
+          <input type="hidden" name="productId" value="{{this._id}}" />
+          <button type="submit" class="pp-card__btn">Thêm vào giỏ</button>
+        </form>
+      </div>
+    </article>
+    {{else}}
+    <p class="pp-empty">Không tìm thấy sản phẩm phù hợp.</p>
+    {{/each}}
+  </section>
 </main>

@@ -1,18 +1,51 @@
+require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 const { engine } = require("express-handlebars");
 
 const route = require("./resources/Routers/index");
 
 const db = require("./app/config");
+db.connect();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const formatVND = (value) =>
   new Intl.NumberFormat("vi-VN").format(value) + " ₫";
 
+// Returns the first letter of the first non-empty argument (used for admin
+// table avatar initials). Handlebars passes an extra options object as the
+// last argument, so we filter that out.
+const initial = (...args) => {
+  const candidates = args.filter((arg) => typeof arg === "string" && arg.trim());
+  const source = candidates[0] || "?";
+  return source.trim().charAt(0).toUpperCase();
+};
+
+const formatDate = (value) => {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("vi-VN").format(date);
+};
+
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "dev_secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+  }),
+);
+// Expose login state to every view
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.user || null;
+  res.locals.year = new Date().getFullYear();
+  next();
+});
 app.use(express.static(path.join(__dirname, "public")));
 
 app.engine(
@@ -22,6 +55,11 @@ app.engine(
     defaultLayout: "main",
     helpers: {
       formatVND: (value) => formatVND(value),
+      initial,
+      formatDate,
+      gt: (a, b) => a > b,
+      eq: (a, b) => a === b,
+      mul: (a, b) => a * b,
     },
   }),
 );

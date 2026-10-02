@@ -1,16 +1,19 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
-const databaseUrl = "mongodb://localhost:27017/dvdshop";
+const databaseUrl = process.env.MONGO_URI || "mongodb://localhost:27017/dvdshop";
 
 async function connect() {
   try {
     await mongoose.connect(databaseUrl);
-    console.log("MongoDB connected to dvdshop");
+    console.log(
+      "✅ MongoDB connected:",
+      databaseUrl.replace(/\/\/.*@/, "//***@"),
+    );
   } catch (error) {
-    console.log("MongoDB connection failed:", error.message);
+    console.error("❌ MongoDB connection failed:", error.message);
+    process.exit(1);
   }
 }
-
-connect();
 
 module.exports = { connect };

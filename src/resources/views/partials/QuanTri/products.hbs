@@ -34,49 +34,36 @@
             </tr>
         </thead>
         <tbody>
+            {{#each products}}
             <tr>
                 <td>
                     <div class="product">
-                        <div class="thumb">D</div>
+                        <div class="thumb">{{initial this.name}}</div>
                         <div>
-                            <strong>Dune: Part Two</strong>
+                            <strong>{{this.name}}</strong>
                         </div>
                     </div>
                 </td>
-                <td>Hành động</td>
-                <td>₫220.000</td>
-                <td>245</td>
-                <td><span class="pill green">Còn hàng</span></td>
-            </tr>
-            <tr>
+                <td>{{#if this.categoryId.name}}{{this.categoryId.name}}{{else}}Chưa phân loại{{/if}}</td>
+                <td>{{formatVND this.price}}</td>
+                <td>{{this.stock}}</td>
                 <td>
-                    <div class="product">
-                        <div class="thumb" style="background: linear-gradient(135deg, #dfeaff, #cfe0ff); color: #2f6cff;">S</div>
-                        <div>
-                            <strong>Spider-Man: Across the Spider-Verse</strong>
-                        </div>
-                    </div>
+                    {{#if this.stock}}
+                        {{#if (gt this.stock 20)}}
+                        <span class="pill green">Còn hàng</span>
+                        {{else}}
+                        <span class="pill yellow">Sắp hết</span>
+                        {{/if}}
+                    {{else}}
+                    <span class="pill yellow">Hết hàng</span>
+                    {{/if}}
                 </td>
-                <td>Hoạt hình</td>
-                <td>₫240.000</td>
-                <td>112</td>
-                <td><span class="pill green">Còn hàng</span></td>
             </tr>
+            {{else}}
             <tr>
-                <td>
-                    <div class="product">
-                        <div class="thumb" style="background: linear-gradient(135deg, #eafaf0, #d8f8df); color: var(--green);">Y</div>
-                        <div>
-                            <strong>Your Name - Limited Edition</strong>
-                        </div>
-                    </div>
-                </td>
-                <td>Anime</td>
-                <td>₫180.000</td>
-                <td>19</td>
-                <td><span class="pill yellow">Sắp hết</span></td>
+                <td colspan="5" style="text-align:center; color: var(--muted);">Chưa có DVD nào.</td>
             </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
-

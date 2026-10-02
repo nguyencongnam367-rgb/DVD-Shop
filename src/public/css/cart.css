@@ -5,10 +5,10 @@ body {
 
 .cart-shell {
   background: linear-gradient(180deg, #181818 0%, #121212 100%);
-  border: 1px solid rgba(255, 140, 0, 0.4);
+  border: 1px solid rgba(201, 162, 39, 0.4);
   border-radius: 1.5rem;
   padding: 1.5rem;
-  box-shadow: 0 1.25rem 2.8125rem rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1.25rem 2.8125rem rgba(0, 0, 0, 0.5);
 }
 
 .cart-header {
@@ -21,6 +21,7 @@ body {
 
 .cart-title {
   margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
   font-size: 2rem;
   font-weight: 800;
   color: #fff;
@@ -34,7 +35,7 @@ body {
 
 .cart-items,
 .cart-summary {
-  background: rgba(28, 28, 28, 0.98);
+  background: rgba(20, 18, 10, 0.98);
   border: 1px solid #2d2d2d;
   border-radius: 1.375rem;
   padding: 1.25rem;
@@ -58,7 +59,7 @@ body {
   width: 7.5rem;
   height: 7.5rem;
   border-radius: 1.125rem;
-  background: linear-gradient(135deg, #f9d9c9, #ffe7d4);
+  background: linear-gradient(135deg, #3a2f10, #5c4a17);
 }
 
 .cart-item h4 {
@@ -82,7 +83,7 @@ body {
 }
 
 .price-tag {
-  color: #ff8c00;
+  color: #e8c766;
   font-weight: 800;
   font-size: 1.05rem;
 }
@@ -148,14 +149,14 @@ body {
 }
 
 .primary-btn {
-  background: linear-gradient(135deg, #ff8c00, #ff5a1f);
-  color: #fff;
+  background: linear-gradient(135deg, #c9a227, #8a6a18);
+  color: #1a1207;
 }
 
 .ghost-btn {
-  background: rgba(255, 140, 0, 0.08);
-  color: #ffb357;
-  border: 1px solid rgba(255, 140, 0, 0.45);
+  background: rgba(201, 162, 39, 0.08);
+  color: #e8c766;
+  border: 1px solid rgba(201, 162, 39, 0.45);
 }
 
 @media (max-width: 900px) {

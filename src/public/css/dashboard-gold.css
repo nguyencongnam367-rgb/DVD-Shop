@@ -1,0 +1,10 @@
+/* Load AFTER dashboard.css: recolors the admin panel to the classic gold theme */
+:root { --primary: #c9a227; --primary-dark: #8a6a18; }
+.brand-mark { background: linear-gradient(135deg, #e8c766, #c9a227); color: #1a1207; box-shadow: 0 12px 24px rgba(201,162,39,.2); }
+.nav-item.active { background: rgba(201,162,39,.12); border-color: rgba(201,162,39,.2); }
+.support-box { background: linear-gradient(135deg, rgba(201,162,39,.14), rgba(255,255,255,.02)); border-color: rgba(201,162,39,.26); }
+.banner { background: linear-gradient(135deg, #8a6a18, #c9a227 60%, #5c4a17); box-shadow: 0 18px 35px rgba(201,162,39,.25); color:#1a1207; }
+.banner h1, .banner p { color: #1a1207; }
+.banner button { color: #8a6a18; }
+.orange { background: rgba(201,162,39,.12); color: #c9a227; }
+h1, .brand-text, .panel-head { font-family: "Playfair Display", Georgia, serif; }

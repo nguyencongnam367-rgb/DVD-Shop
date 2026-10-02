@@ -23,9 +23,21 @@
 
         <form action="/cart/add" method="POST">
           <input type="hidden" name="productId" value="{{this._id}}" />
-          <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
+          <button type="submit" class="btn-add-cart">
+            <span class="morph-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 6h15l-1.5 9h-12z" />
+                <circle cx="9" cy="20" r="1.4" />
+                <circle cx="18" cy="20" r="1.4" />
+                <path d="M3 3h2l1 3" />
+              </svg>
+            </span>
+            Thêm Vào Giỏ Hàng
+          </button>
         </form>
       </div>
+    {{else}}
+      <p style="color: var(--text-soft);">Chưa có sản phẩm nào.</p>
     {{/each}}
   </div>
 </main>

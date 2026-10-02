@@ -1,6 +1,13 @@
 :root {
   --font-sans: "Be Vietnam Pro", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
   --text-soft: #c7c7c7;
+
+  /* Classic cinema palette: dark background, aged-gold accent */
+  --gold: #c9a227;
+  --gold-soft: #e8c766;
+  --gold-dim: rgba(201, 162, 39, 0.25);
+  --gold-dim-strong: rgba(201, 162, 39, 0.7);
 }
 
 * {
@@ -42,10 +49,11 @@ body a:visited {
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1.1;
+  font-family: var(--font-serif);
 }
 
 .logo span {
-  color: #888;
+  color: var(--gold);
 }
 
 .nav-links {
@@ -58,7 +66,7 @@ body a:visited {
 }
 
 .nav-links a:hover {
-  color: #fff;
+  color: var(--gold-soft);
 }
 
 .hero {
@@ -82,11 +90,14 @@ body a:visited {
 }
 
 .hero-title {
+  font-family: var(--font-serif);
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 800;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
   margin-bottom: 0.5rem;
+  color: var(--gold-soft);
+  text-shadow: 0 2px 18px rgba(201, 162, 39, 0.25);
 }
 
 .hero-subtitle {
@@ -98,8 +109,8 @@ body a:visited {
 }
 
 .btn-orange {
-  background-color: #ff8c00;
-  color: #fff;
+  background: linear-gradient(135deg, var(--gold), #8a6a18);
+  color: #1a1207;
   padding: 10px 22px;
   font-size: 12px;
   font-weight: 700;
@@ -111,7 +122,7 @@ body a:visited {
 }
 
 .btn-red:hover {
-  background-color: #b80710;
+  background-color: #8a6a18;
 }
 
 .section-container {
@@ -119,11 +130,12 @@ body a:visited {
 }
 
 .section-title {
+  font-family: var(--font-serif);
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   margin-bottom: 25px;
-  color: #fff;
+  color: var(--gold-soft);
   text-transform: uppercase;
 }
 
@@ -184,8 +196,8 @@ body a:visited {
 }
 
 .movie-card {
-  background: rgba(26, 26, 26, 0.96);
-  border: 1px solid rgba(255, 140, 0, 0.2);
+  background: rgba(20, 18, 10, 0.96);
+  border: 1px solid var(--gold-dim);
   border-radius: 0.875rem;
   padding: 0.75rem;
   display: flex;
@@ -199,8 +211,9 @@ body a:visited {
 }
 
 .movie-card:hover {
-  border-color: rgba(255, 140, 0, 0.7);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.26);
+  border-color: var(--gold-dim-strong);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+  transform: translateY(-2px);
 }
 
 .movie-card > a {
@@ -216,7 +229,8 @@ body a:visited {
   overflow: hidden;
   margin-bottom: 0.75rem;
   background-color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 162, 39, 0.12);
+  filter: sepia(0.15) contrast(1.05);
 }
 
 .poster-box img {
@@ -232,7 +246,8 @@ body a:visited {
 }
 
 .movie-name {
-  font-size: 0.82rem;
+  font-family: var(--font-serif);
+  font-size: 0.86rem;
   font-weight: 700;
   line-height: 1.45;
   color: #fff;
@@ -251,7 +266,7 @@ body a:visited {
 .movie-price {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: #ff8c00;
+  color: var(--gold-soft);
   font-weight: 700;
 }
 
@@ -261,8 +276,8 @@ body a:visited {
   padding: 0.625rem 0.75rem;
   border: none;
   border-radius: 0.25rem;
-  background: linear-gradient(135deg, #ff8c00, #ff4d00);
-  color: #fff;
+  background: linear-gradient(135deg, var(--gold), #8a6a18);
+  color: #1a1207;
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.05rem;
@@ -272,7 +287,7 @@ body a:visited {
 }
 
 .btn-add-cart:hover {
-  background: linear-gradient(135deg, #ff9f1a, #ff5a1f);
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
   transform: translateY(-1px);
 }
 
@@ -283,17 +298,17 @@ body a:visited {
   justify-content: center;
   padding: 40px 20px;
   background:
-    linear-gradient(rgba(18, 18, 18, 0.86), rgba(18, 18, 18, 0.86)),
+    linear-gradient(rgba(18, 18, 18, 0.88), rgba(18, 18, 18, 0.88)),
     url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80")
       center/cover no-repeat;
 }
 
 .auth-card {
   width: min(100%, 520px);
-  background: rgba(26, 26, 26, 0.96);
-  border: 1px solid rgba(255, 140, 0, 0.45);
+  background: rgba(20, 18, 10, 0.96);
+  border: 1px solid rgba(201, 162, 39, 0.45);
   border-radius: 18px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
   padding: 34px 30px;
 }
 
@@ -303,10 +318,11 @@ body a:visited {
   font-weight: 700;
   letter-spacing: 0.18rem;
   text-transform: uppercase;
-  color: #ff8c00;
+  color: var(--gold);
 }
 
 .auth-header h1 {
+  font-family: var(--font-serif);
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
   margin-bottom: 8px;
@@ -357,8 +373,8 @@ body a:visited {
 }
 
 .auth-field input:focus {
-  border-color: #ff8c00;
-  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.18);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
 }
 
 .auth-submit {
@@ -367,8 +383,8 @@ body a:visited {
   padding: 14px 18px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #ff8c00, #ff5a1f);
-  color: #fff;
+  background: linear-gradient(135deg, var(--gold), #8a6a18);
+  color: #1a1207;
   font-size: 0.96rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -380,7 +396,7 @@ body a:visited {
 
 .auth-submit:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(201, 162, 39, 0.25);
 }
 
 .auth-switch,
@@ -393,17 +409,44 @@ body a:visited {
 
 .auth-switch a,
 .auth-back {
-  color: #ff8c00;
+  color: var(--gold);
   font-weight: 700;
   text-decoration: none;
 }
 
 .auth-switch a:hover,
 .auth-back:hover {
-  color: #ffaf4d;
+  color: var(--gold-soft);
 }
 
 .auth-back {
   display: block;
   margin-top: 16px;
+}
+
+/* Morphicon-style animated icon wrapper.
+   Drop an inline <svg> (e.g. exported from morphicons.com) inside
+   an element with class "morph-icon" and it will morph on hover. */
+.morph-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.morph-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    stroke 0.3s ease;
+}
+
+.morph-icon:hover svg,
+.icon-btn:hover .morph-icon svg,
+.btn-add-cart:hover .morph-icon svg {
+  transform: scale(1.18) rotate(-6deg);
+  stroke: var(--gold-soft);
 }

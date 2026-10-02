@@ -1,30 +1,32 @@
-<header class="main-header">
-  <div class="header-container">
-    <div class="header-left">
-      <nav class="main-nav">
-        <div class="nav-dropdown">
-          <button class="nav-trigger" type="button">Menu</button>
-          <div class="submenu" aria-label="submenu">
-            <a href="/">Trang chủ</a>
-            <a href="/products">Sản phẩm</a>
-            <a href="/cart">Giỏ hàng</a>
-            <a href="/admin/dashboard">Quản trị</a>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-    <a href="/" class="logo" aria-label="DVDShop home">
-      <span class="logo-icon"><img
-          src="/image/logo.png"
-          alt="DVDShop Logo"
-        /></span>
-      <span>DVD<span>Shop</span></span>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="brand" aria-label="DVDShop - Trang chủ">
+      <span class="brand__mark"><i class="fa-solid fa-film"></i></span>
+      <span class="brand__name">DVD<em>Shop</em></span>
     </a>
 
-    <div class="header-actions">
-      <a href="/auth/login" class="login-btn">Đăng nhập</a>
-      <a href="/auth/register" class="register-btn">Đăng ký</a>
-    </div>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+    <label for="nav-toggle" class="nav-burger" aria-label="Mở menu">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="site-nav" aria-label="Điều hướng chính">
+      <a href="/" class="site-nav__link">Trang chủ</a>
+      <a href="/products" class="site-nav__link">Sản phẩm</a>
+      <a href="/cart" class="site-nav__link"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
+      {{#if currentUser}}{{#if (eq currentUser.role "admin")}}
+      <a href="/admin/dashboard" class="site-nav__link">Quản trị</a>
+      {{/if}}{{/if}}
+
+      <div class="site-nav__actions">
+        {{#if currentUser}}
+          <span class="user-chip"><i class="fa-regular fa-user"></i> {{currentUser.username}}</span>
+          <a href="/auth/logout" class="btn-solid">Đăng xuất</a>
+        {{else}}
+          <a href="/auth/login" class="btn-ghost">Đăng nhập</a>
+          <a href="/auth/register" class="btn-solid">Đăng ký</a>
+        {{/if}}
+      </div>
+    </nav>
   </div>
 </header>

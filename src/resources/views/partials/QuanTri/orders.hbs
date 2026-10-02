@@ -34,28 +34,29 @@
             </tr>
         </thead>
         <tbody>
+            {{#each orders}}
             <tr>
-                <td>#2048</td>
-                <td>Nguyễn Văn A</td>
-                <td>₫220.000</td>
-                <td>12/09/2026</td>
-                <td><span class="pill green">Đã giao</span></td>
+                <td>#{{this.orderCode}}</td>
+                <td>{{#if this.userId.fullName}}{{this.userId.fullName}}{{else}}{{this.receiverName}}{{/if}}</td>
+                <td>{{formatVND this.totalAmount}}</td>
+                <td>{{formatDate this.createdAt}}</td>
+                <td>
+                    {{#if (eq this.status "Hoàn thành")}}
+                    <span class="pill green">Đã giao</span>
+                    {{else if (eq this.status "Đang giao")}}
+                    <span class="pill yellow">Đang xử lý</span>
+                    {{else if (eq this.status "Đã huỷ")}}
+                    <span class="pill yellow">Đã huỷ</span>
+                    {{else}}
+                    <span class="pill yellow">Chờ xác nhận</span>
+                    {{/if}}
+                </td>
             </tr>
+            {{else}}
             <tr>
-                <td>#2049</td>
-                <td>Trần Thị B</td>
-                <td>₫240.000</td>
-                <td>10/09/2026</td>
-                <td><span class="pill yellow">Đang xử lý</span></td>
+                <td colspan="5" style="text-align:center; color: var(--muted);">Chưa có đơn hàng nào.</td>
             </tr>
-            <tr>
-                <td>#2050</td>
-                <td>Lê Minh C</td>
-                <td>₫180.000</td>
-                <td>08/09/2026</td>
-                <td><span class="pill yellow">Chờ xác nhận</span></td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
-
