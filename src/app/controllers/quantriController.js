@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Product = require("../models/ProductModel");
 const User = require("../models/UserModel");
 const Order = require("../models/OrderModel");
@@ -64,23 +63,6 @@ class QuanTriController {
       console.error("Không thể tải danh sách đơn hàng:", error.message);
       return res.status(500).send("Không thể tải danh sách đơn hàng");
     }
-=======
-class QuanTriController {
-  dashboard(req, res) {
-    res.render("partials/QuanTri/home", { layout: "DashBoard" });
-  }
-
-  users(req, res) {
-    res.render("partials/QuanTri/users", { layout: "DashBoard" });
-  }
-
-  products(req, res) {
-    res.render("partials/QuanTri/products", { layout: "DashBoard" });
-  }
-
-  orders(req, res) {
-    res.render("partials/QuanTri/orders", { layout: "DashBoard" });
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   }
 }
 

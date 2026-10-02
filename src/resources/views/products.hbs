@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <main class="pp">
   <header class="pp-head">
     <p class="pp-kicker">Bộ sưu tập</p>
@@ -69,22 +68,3 @@
     {{/each}}
   </section>
 </main>
-=======
-<main class="section-container">
-  <h2 class="section-title">Tất cả sản phẩm</h2>
-  <div class="movie-grid">
-    {{#each products}}
-      <div class="movie-card">
-        <a href="/product/{{this._id}}">
-          <div class="poster-box">
-            <img src="{{this.image}}" alt="{{this.name}}" />
-          </div>
-          <div class="movie-name">{{this.name}}</div>
-          <div class="movie-desc">{{this.director}}</div>
-          <div class="movie-price">{{formatVND this.price}}</div>
-        </a>
-      </div>
-    {{/each}}
-  </div>
-</main>
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2

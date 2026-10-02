@@ -1,31 +1,20 @@
-<<<<<<< HEAD
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
-=======
-const express = require("express");
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 const path = require("path");
 const { engine } = require("express-handlebars");
 
 const route = require("./resources/Routers/index");
 
 const db = require("./app/config");
-<<<<<<< HEAD
 db.connect();
 
 const app = express();
 const port = process.env.PORT || 3000;
-=======
-
-const app = express();
-const port = 3000;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 
 const formatVND = (value) =>
   new Intl.NumberFormat("vi-VN").format(value) + " ₫";
 
-<<<<<<< HEAD
 // Returns the first letter of the first non-empty argument (used for admin
 // table avatar initials). Handlebars passes an extra options object as the
 // last argument, so we filter that out.
@@ -57,9 +46,6 @@ app.use((req, res, next) => {
   res.locals.year = new Date().getFullYear();
   next();
 });
-=======
-app.use(express.urlencoded({ extended: true }));
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 app.use(express.static(path.join(__dirname, "public")));
 
 app.engine(
@@ -69,14 +55,11 @@ app.engine(
     defaultLayout: "main",
     helpers: {
       formatVND: (value) => formatVND(value),
-<<<<<<< HEAD
       initial,
       formatDate,
       gt: (a, b) => a > b,
       eq: (a, b) => a === b,
       mul: (a, b) => a * b,
-=======
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
     },
   }),
 );

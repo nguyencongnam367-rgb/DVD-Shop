@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 const bcrypt = require("bcryptjs");
 const User = require("../models/UserModel");
 
-=======
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 class AuthController {
   showLogin(req, res) {
     res.render("login", { layout: "main" });
   }
 
-<<<<<<< HEAD
   async login(req, res) {
     try {
       const { username, password } = req.body;
@@ -24,17 +20,12 @@ class AuthController {
       console.error("Lỗi đăng nhập:", error.message);
       return res.status(500).send("Lỗi hệ thống");
     }
-=======
-  login(req, res) {
-    res.redirect("/");
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   }
 
   showRegister(req, res) {
     res.render("register", { layout: "main" });
   }
 
-<<<<<<< HEAD
   async register(req, res) {
     try {
       const { username, email, password } = req.body;
@@ -51,10 +42,6 @@ class AuthController {
 
   logout(req, res) {
     req.session.destroy(() => res.redirect("/"));
-=======
-  register(req, res) {
-    res.redirect("/auth/login");
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   }
 }
 

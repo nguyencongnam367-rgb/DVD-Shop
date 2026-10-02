@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Product = require("../models/ProductModel");
 const Category = require("../models/CategoryModel");
 
@@ -60,23 +59,6 @@ class ProductController {
       console.error("Không thể tải chi tiết sản phẩm:", error.message);
       return res.status(500).send("Không thể tải dữ liệu sản phẩm");
     }
-=======
-const products = require("../data/products");
-
-class ProductController {
-  index(req, res) {
-    res.render("products", { products, layout: "main" });
-  }
-
-  show(req, res) {
-    const product = products.find((item) => item._id === req.params.id);
-
-    if (!product) {
-      return res.status(404).send("Không tìm thấy sản phẩm");
-    }
-
-    return res.render("products_detail", { product, layout: "main" });
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   }
 }
 

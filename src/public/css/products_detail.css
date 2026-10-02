@@ -6,22 +6,14 @@
 .product-detail__back {
   display: inline-block;
   margin-bottom: 1.75rem;
-<<<<<<< HEAD
   color: #c9a227;
-=======
-  color: #ff8c00;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   text-decoration: none;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
 .product-detail__back:hover {
-<<<<<<< HEAD
   color: #e8c766;
-=======
-  color: #ffaf4d;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .product-detail__content {
@@ -32,17 +24,10 @@
   max-width: 68.75rem;
   margin: 0 auto;
   padding: 1.75rem;
-<<<<<<< HEAD
   background: rgba(20, 18, 10, 0.96);
   border: 1px solid rgba(201, 162, 39, 0.35);
   border-radius: 1.375rem;
   box-shadow: 0 1.25rem 2.8125rem rgba(0, 0, 0, 0.5);
-=======
-  background: rgba(26, 26, 26, 0.96);
-  border: 1px solid rgba(255, 140, 0, 0.35);
-  border-radius: 1.375rem;
-  box-shadow: 0 1.25rem 2.8125rem rgba(0, 0, 0, 0.32);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .product-detail__image-wrap {
@@ -50,12 +35,8 @@
   background: #100f0f;
   aspect-ratio: 4 / 5;
   border-radius: 1.125rem;
-<<<<<<< HEAD
   border: 1px solid rgba(201, 162, 39, 0.12);
   filter: sepia(0.12) contrast(1.05);
-=======
-  border: 1px solid rgba(255, 255, 255, 0.05);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .product-detail__image {
@@ -76,11 +57,7 @@
 
 .product-detail__eyebrow {
   margin: 0 0 12px;
-<<<<<<< HEAD
   color: #c9a227;
-=======
-  color: #ff8c00;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -88,10 +65,7 @@
 }
 
 .product-detail__title {
-<<<<<<< HEAD
   font-family: "Playfair Display", Georgia, serif;
-=======
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   margin: 0 0 12px;
   font-size: clamp(2rem, 4vw, 3.5rem);
   line-height: 1.08;
@@ -116,11 +90,7 @@
   margin: 0 0 24px;
   font-size: 1.75rem;
   font-weight: 800;
-<<<<<<< HEAD
   color: #e8c766;
-=======
-  color: #ff8c00;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 @media (max-width: 700px) {

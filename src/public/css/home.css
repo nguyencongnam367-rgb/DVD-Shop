@@ -1,6 +1,5 @@
 :root {
   --font-sans: "Be Vietnam Pro", sans-serif;
-<<<<<<< HEAD
   --font-serif: "Playfair Display", Georgia, serif;
   --text-soft: #c7c7c7;
 
@@ -9,9 +8,6 @@
   --gold-soft: #e8c766;
   --gold-dim: rgba(201, 162, 39, 0.25);
   --gold-dim-strong: rgba(201, 162, 39, 0.7);
-=======
-  --text-soft: #c7c7c7;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 * {
@@ -53,18 +49,11 @@ body a:visited {
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1.1;
-<<<<<<< HEAD
   font-family: var(--font-serif);
 }
 
 .logo span {
   color: var(--gold);
-=======
-}
-
-.logo span {
-  color: #888;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .nav-links {
@@ -77,11 +66,7 @@ body a:visited {
 }
 
 .nav-links a:hover {
-<<<<<<< HEAD
   color: var(--gold-soft);
-=======
-  color: #fff;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .hero {
@@ -105,7 +90,6 @@ body a:visited {
 }
 
 .hero-title {
-<<<<<<< HEAD
   font-family: var(--font-serif);
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 800;
@@ -114,13 +98,6 @@ body a:visited {
   margin-bottom: 0.5rem;
   color: var(--gold-soft);
   text-shadow: 0 2px 18px rgba(201, 162, 39, 0.25);
-=======
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .hero-subtitle {
@@ -132,13 +109,8 @@ body a:visited {
 }
 
 .btn-orange {
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--gold), #8a6a18);
   color: #1a1207;
-=======
-  background-color: #ff8c00;
-  color: #fff;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   padding: 10px 22px;
   font-size: 12px;
   font-weight: 700;
@@ -150,11 +122,7 @@ body a:visited {
 }
 
 .btn-red:hover {
-<<<<<<< HEAD
   background-color: #8a6a18;
-=======
-  background-color: #b80710;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .section-container {
@@ -162,19 +130,12 @@ body a:visited {
 }
 
 .section-title {
-<<<<<<< HEAD
   font-family: var(--font-serif);
-=======
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   margin-bottom: 25px;
-<<<<<<< HEAD
   color: var(--gold-soft);
-=======
-  color: #fff;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   text-transform: uppercase;
 }
 
@@ -235,13 +196,8 @@ body a:visited {
 }
 
 .movie-card {
-<<<<<<< HEAD
   background: rgba(20, 18, 10, 0.96);
   border: 1px solid var(--gold-dim);
-=======
-  background: rgba(26, 26, 26, 0.96);
-  border: 1px solid rgba(255, 140, 0, 0.2);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   border-radius: 0.875rem;
   padding: 0.75rem;
   display: flex;
@@ -255,14 +211,9 @@ body a:visited {
 }
 
 .movie-card:hover {
-<<<<<<< HEAD
   border-color: var(--gold-dim-strong);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
   transform: translateY(-2px);
-=======
-  border-color: rgba(255, 140, 0, 0.7);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.26);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .movie-card > a {
@@ -278,12 +229,8 @@ body a:visited {
   overflow: hidden;
   margin-bottom: 0.75rem;
   background-color: #000;
-<<<<<<< HEAD
   border: 1px solid rgba(201, 162, 39, 0.12);
   filter: sepia(0.15) contrast(1.05);
-=======
-  border: 1px solid rgba(255, 255, 255, 0.05);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .poster-box img {
@@ -299,12 +246,8 @@ body a:visited {
 }
 
 .movie-name {
-<<<<<<< HEAD
   font-family: var(--font-serif);
   font-size: 0.86rem;
-=======
-  font-size: 0.82rem;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-weight: 700;
   line-height: 1.45;
   color: #fff;
@@ -323,11 +266,7 @@ body a:visited {
 .movie-price {
   margin-top: 0.5rem;
   font-size: 0.85rem;
-<<<<<<< HEAD
   color: var(--gold-soft);
-=======
-  color: #ff8c00;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-weight: 700;
 }
 
@@ -337,13 +276,8 @@ body a:visited {
   padding: 0.625rem 0.75rem;
   border: none;
   border-radius: 0.25rem;
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--gold), #8a6a18);
   color: #1a1207;
-=======
-  background: linear-gradient(135deg, #ff8c00, #ff4d00);
-  color: #fff;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.05rem;
@@ -353,11 +287,7 @@ body a:visited {
 }
 
 .btn-add-cart:hover {
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-=======
-  background: linear-gradient(135deg, #ff9f1a, #ff5a1f);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   transform: translateY(-1px);
 }
 
@@ -368,28 +298,17 @@ body a:visited {
   justify-content: center;
   padding: 40px 20px;
   background:
-<<<<<<< HEAD
     linear-gradient(rgba(18, 18, 18, 0.88), rgba(18, 18, 18, 0.88)),
-=======
-    linear-gradient(rgba(18, 18, 18, 0.86), rgba(18, 18, 18, 0.86)),
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
     url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80")
       center/cover no-repeat;
 }
 
 .auth-card {
   width: min(100%, 520px);
-<<<<<<< HEAD
   background: rgba(20, 18, 10, 0.96);
   border: 1px solid rgba(201, 162, 39, 0.45);
   border-radius: 18px;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-=======
-  background: rgba(26, 26, 26, 0.96);
-  border: 1px solid rgba(255, 140, 0, 0.45);
-  border-radius: 18px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   padding: 34px 30px;
 }
 
@@ -399,18 +318,11 @@ body a:visited {
   font-weight: 700;
   letter-spacing: 0.18rem;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: var(--gold);
 }
 
 .auth-header h1 {
   font-family: var(--font-serif);
-=======
-  color: #ff8c00;
-}
-
-.auth-header h1 {
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
   margin-bottom: 8px;
@@ -461,13 +373,8 @@ body a:visited {
 }
 
 .auth-field input:focus {
-<<<<<<< HEAD
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
-=======
-  border-color: #ff8c00;
-  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.18);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .auth-submit {
@@ -476,13 +383,8 @@ body a:visited {
   padding: 14px 18px;
   border: none;
   border-radius: 10px;
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--gold), #8a6a18);
   color: #1a1207;
-=======
-  background: linear-gradient(135deg, #ff8c00, #ff5a1f);
-  color: #fff;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-size: 0.96rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -494,11 +396,7 @@ body a:visited {
 
 .auth-submit:hover {
   transform: translateY(-1px);
-<<<<<<< HEAD
   box-shadow: 0 10px 20px rgba(201, 162, 39, 0.25);
-=======
-  box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .auth-switch,
@@ -511,29 +409,20 @@ body a:visited {
 
 .auth-switch a,
 .auth-back {
-<<<<<<< HEAD
   color: var(--gold);
-=======
-  color: #ff8c00;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
   font-weight: 700;
   text-decoration: none;
 }
 
 .auth-switch a:hover,
 .auth-back:hover {
-<<<<<<< HEAD
   color: var(--gold-soft);
-=======
-  color: #ffaf4d;
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
 }
 
 .auth-back {
   display: block;
   margin-top: 16px;
 }
-<<<<<<< HEAD
 
 /* Morphicon-style animated icon wrapper.
    Drop an inline <svg> (e.g. exported from morphicons.com) inside
@@ -561,5 +450,3 @@ body a:visited {
   transform: scale(1.18) rotate(-6deg);
   stroke: var(--gold-soft);
 }
-=======
->>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
