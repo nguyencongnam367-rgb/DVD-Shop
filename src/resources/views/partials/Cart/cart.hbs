@@ -1,0 +1,102 @@
+<<<<<<< HEAD
+<div class="cart-shell">
+  <div class="cart-header">
+    <h1 class="cart-title">Giỏ hàng của bạn</h1>
+    <a href="/products" class="ghost-btn" style="width:auto; margin:0; padding:10px 14px;">Tiếp tục mua sắm</a>
+  </div>
+
+  <div class="cart-layout">
+    <div class="cart-items">
+      {{#each cartItems}}
+      <div class="cart-item">
+        <div class="cart-thumb" style="background: url('{{this.image}}') center/cover;"></div>
+        <div>
+          <h4>{{this.name}}</h4>
+          <div class="cart-small">Số lượng: {{this.quantity}}</div>
+          <div class="price-row"><span class="price-tag">{{formatVND this.price}}</span></div>
+        </div>
+        <div class="price-tag">{{formatVND (mul this.price this.quantity)}}</div>
+      </div>
+      {{else}}
+      <p style="color:#bdbdbd;">Giỏ hàng trống.</p>
+      {{/each}}
+    </div>
+
+    <aside class="cart-summary">
+      <h3>Thông tin đơn hàng</h3>
+      <div class="summary-row"><span>Tạm tính</span><strong>{{formatVND subtotal}}</strong></div>
+      <div class="summary-row"><span>Phí vận chuyển</span><strong>{{formatVND shipping}}</strong></div>
+      <div class="summary-row"><span>Giảm giá</span><strong>-{{formatVND discount}}</strong></div>
+      <div class="summary-row total"><span>Tổng cộng</span><span>{{formatVND total}}</span></div>
+      <button class="primary-btn">Tiến hành thanh toán</button>
+    </aside>
+  </div>
+=======
+
+<div class="cart-shell">
+    <div class="cart-header">
+        <h1 class="cart-title">Giỏ hàng của bạn</h1>
+        <button class="ghost-btn" style="width:auto; margin:0; padding:10px 14px;">Tiếp tục mua sắm</button>
+    </div>
+
+    <div class="cart-layout">
+        <div class="cart-items">
+            <div class="cart-item">
+                <div class="cart-thumb" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);"></div>
+                <div>
+                    <h4>Dune: Part Two</h4>
+                    <div class="cart-small">Phân loại: DVD • Bản đầy đủ</div>
+                    <div class="price-row">
+                        <span class="price-tag">₫220.000</span>
+                        <div class="qty-control">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="price-tag">₫220.000</div>
+            </div>
+
+            <div class="cart-item">
+                <div class="cart-thumb" style="background: linear-gradient(135deg, #fef1d8, #ffd39d);"></div>
+                <div>
+                    <h4>Spider-Man: Across the Spider-Verse</h4>
+                    <div class="cart-small">Phân loại: DVD • Phim hoạt hình</div>
+                    <div class="price-row">
+                        <span class="price-tag">₫240.000</span>
+                        <div class="qty-control">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="price-tag">₫240.000</div>
+            </div>
+        </div>
+
+        <aside class="cart-summary">
+            <h3>Thông tin đơn hàng</h3>
+            <div class="summary-row">
+                <span>Tạm tính</span>
+                <strong>₫460.000</strong>
+            </div>
+            <div class="summary-row">
+                <span>Phí vận chuyển</span>
+                <strong>₫30.000</strong>
+            </div>
+            <div class="summary-row">
+                <span>Giảm giá</span>
+                <strong>-₫50.000</strong>
+            </div>
+            <div class="summary-row total">
+                <span>Tổng cộng</span>
+                <span>₫440.000</span>
+            </div>
+            <button class="primary-btn">Tiến hành thanh toán</button>
+            <button class="ghost-btn">Mã giảm giá</button>
+        </aside>
+    </div>
+>>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
+</div>

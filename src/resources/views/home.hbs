@@ -1,0 +1,59 @@
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">THE CINEMATIC COLLECTION.</h1>
+    <p class="hero-subtitle">Curated. Cult. Classic.</p>
+    <a href="#" class="btn-orange">EXPLORE NOW</a>
+  </div>
+</section>
+
+<main class="section-container">
+  <h2 class="section-title">FEATURED DVDS</h2>
+
+  <div class="movie-grid">
+    {{#each products}}
+      <div class="movie-card">
+        <a href="/home/{{this.slug}}">
+          <div class="poster-box">
+            <img src="{{this.image}}" alt="{{this.name}}" />
+          </div>
+          <div class="movie-name">{{this.name}}</div>
+          <div class="movie-desc">{{this.director}}</div>
+          <div class="movie-price">{{formatVND this.price}}</div>
+        </a>
+
+        <form action="/cart/add" method="POST">
+          <input type="hidden" name="productId" value="{{this._id}}" />
+<<<<<<< HEAD
+          <button type="submit" class="btn-add-cart">
+            <span class="morph-icon">
+              <!--
+                Paste an inline <svg> exported from https://www.morphicons.com/
+                (cart / bag icon) here. Example placeholder shape below —
+                replace with the real Morphicons markup for the true morph
+                animation; the .morph-icon CSS rule already handles the
+                hover transition.
+              -->
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 6h15l-1.5 9h-12z" />
+                <circle cx="9" cy="20" r="1.4" />
+                <circle cx="18" cy="20" r="1.4" />
+                <path d="M3 3h2l1 3" />
+              </svg>
+            </span>
+            Thêm Vào Giỏ Hàng
+          </button>
+        </form>
+      </div>
+    {{else}}
+      <p style="color: var(--text-soft);">Chưa có sản phẩm nào.</p>
+    {{/each}}
+  </div>
+</main>
+=======
+          <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
+        </form>
+      </div>
+    {{/each}}
+  </div>
+</main>
+>>>>>>> 0e993ed6e1c16f1a044db3b8c4804bc665de8ed2
