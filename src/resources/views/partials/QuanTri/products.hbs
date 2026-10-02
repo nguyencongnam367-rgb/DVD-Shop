@@ -20,7 +20,7 @@
 <section class="table-panel" style="margin-top: 24px;">
     <div class="panel-head">
         <span>Danh sách DVD</span>
-        <button style="border:none; background: var(--primary); color:white; border-radius: 10px; padding: 10px 14px; font-weight: 700; cursor: pointer;">+ Thêm mới</button>
+        <a class="admin-form-button" href="/admin/products/add"><i class="fa-solid fa-plus"></i> Thêm mới</a>
     </div>
 
     <table>
@@ -31,6 +31,7 @@
                 <th>Giá</th>
                 <th>Kho</th>
                 <th>Trạng thái</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -58,10 +59,11 @@
                     <span class="pill yellow">Hết hàng</span>
                     {{/if}}
                 </td>
+                <td><a class="admin-table-action" href="/admin/products/{{this._id}}/upgrade">Sửa</a></td>
             </tr>
             {{else}}
             <tr>
-                <td colspan="5" style="text-align:center; color: var(--muted);">Chưa có DVD nào.</td>
+                <td colspan="6" style="text-align:center; color: var(--muted);">Chưa có DVD nào.</td>
             </tr>
             {{/each}}
         </tbody>

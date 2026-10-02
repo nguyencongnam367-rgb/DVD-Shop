@@ -1,0 +1,26 @@
+.admin-product-upgrade .admin-product-heading {
+  border-left: 3px solid var(--yellow);
+}
+
+.admin-product-upgrade .admin-product-kicker {
+  margin: 0 0 4px;
+  color: var(--yellow);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-product-upgrade .admin-product-heading h1 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.admin-product-upgrade .admin-product-identity {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.admin-product-upgrade .admin-form-submit {
+  min-width: 160px;
+}

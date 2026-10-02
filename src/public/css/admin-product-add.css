@@ -1,0 +1,20 @@
+.admin-product-add .admin-product-heading {
+  border-left: 3px solid var(--primary);
+}
+
+.admin-product-add .admin-product-kicker {
+  margin: 0 0 4px;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-product-add .admin-product-heading h1 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.admin-product-add .admin-form-submit {
+  min-width: 160px;
+}

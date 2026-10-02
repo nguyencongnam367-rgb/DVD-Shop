@@ -1,0 +1,81 @@
+{{#if error}}
+  <p class="admin-form-error" role="alert">{{error}}</p>
+{{/if}}
+
+<div class="admin-form-grid">
+  <label class="admin-form-field">
+    Tên sản phẩm
+    <input type="text" name="name" value="{{product.name}}" required maxlength="160" />
+  </label>
+
+  <label class="admin-form-field">
+    Đường dẫn (slug)
+    <input type="text" name="slug" value="{{product.slug}}" required maxlength="180" />
+  </label>
+
+  <label class="admin-form-field">
+    Thể loại
+    <select name="categoryId">
+      <option value="">Chưa phân loại</option>
+      {{#each categories}}
+        <option value="{{this._id}}" {{#if (eq this._id ../product.categoryId)}}selected{{/if}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+  </label>
+
+  <label class="admin-form-field">
+    Đạo diễn
+    <input type="text" name="director" value="{{product.director}}" maxlength="120" />
+  </label>
+
+  <label class="admin-form-field">
+    Giá gốc (VND)
+    <input type="number" name="price" value="{{product.price}}" min="0" step="1000" required />
+  </label>
+
+  <label class="admin-form-field">
+    Giá khuyến mãi (VND)
+    <input type="number" name="discountPrice" value="{{product.discountPrice}}" min="0" step="1000" />
+  </label>
+
+  <label class="admin-form-field">
+    Tồn kho
+    <input type="number" name="stock" value="{{product.stock}}" min="0" step="1" />
+  </label>
+
+  <label class="admin-form-field">
+    Năm phát hành
+    <input type="number" name="releaseYear" value="{{product.releaseYear}}" min="1888" step="1" />
+  </label>
+
+  <label class="admin-form-field">
+    Thời lượng (phút)
+    <input type="number" name="duration" value="{{product.duration}}" min="0" step="1" />
+  </label>
+
+  <label class="admin-form-field">
+    Ngôn ngữ
+    <input type="text" name="language" value="{{product.language}}" maxlength="80" />
+  </label>
+
+  <label class="admin-form-field admin-form-field--wide">
+    URL ảnh
+    <input type="url" name="image" value="{{product.image}}" />
+  </label>
+
+  <label class="admin-form-field admin-form-field--wide">
+    Mô tả
+    <textarea name="description" rows="5">{{product.description}}</textarea>
+  </label>
+</div>
+
+<div class="admin-form-checks">
+  <label class="admin-form-check">
+    <input type="checkbox" name="isFeatured" value="on" {{#if product.isFeatured}}checked{{/if}} />
+    Nổi bật
+  </label>
+  <label class="admin-form-check">
+    <input type="checkbox" name="isActive" value="on" {{#if product.isActive}}checked{{/if}} />
+    Đang hiển thị
+  </label>
+</div>

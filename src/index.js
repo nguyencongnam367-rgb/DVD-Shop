@@ -14,10 +14,6 @@ const port = process.env.PORT || 3000;
 
 const formatVND = (value) =>
   new Intl.NumberFormat("vi-VN").format(value) + " ₫";
-
-// Returns the first letter of the first non-empty argument (used for admin
-// table avatar initials). Handlebars passes an extra options object as the
-// last argument, so we filter that out.
 const initial = (...args) => {
   const candidates = args.filter((arg) => typeof arg === "string" && arg.trim());
   const source = candidates[0] || "?";
@@ -40,7 +36,6 @@ app.use(
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
   }),
 );
-// Expose login state to every view
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.user || null;
   res.locals.year = new Date().getFullYear();

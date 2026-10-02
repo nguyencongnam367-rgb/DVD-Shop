@@ -37,18 +37,12 @@
   border: 1px solid #c9a227;
   color: #c9a227;
   font-size: 0.95rem;
-<<<<<<< HEAD
   transition:
     transform 0.6s ease,
     background 0.3s ease,
     color 0.3s ease;
 }
 .site-header .brand:hover .brand__mark {
-=======
-  transition: transform 0.6s ease, background 0.3s ease, color 0.3s ease;
-}
-.brand:hover .brand__mark {
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
   transform: rotate(360deg);
   background: #c9a227;
   color: #0a0a0a;
@@ -89,7 +83,6 @@
   height: 2px;
   background: #e8c766;
   border-radius: 2px;
-<<<<<<< HEAD
   transition:
     transform 0.3s ease,
     opacity 0.2s ease;
@@ -151,55 +144,6 @@
   margin-left: clamp(0rem, 1vw, 1rem);
 }
 
-=======
-  transition: transform 0.3s ease, opacity 0.2s ease;
-}
-.nav-toggle:checked ~ .nav-burger span:nth-child(1) { transform: translateY(0.4rem) rotate(45deg); }
-.nav-toggle:checked ~ .nav-burger span:nth-child(2) { opacity: 0; }
-.nav-toggle:checked ~ .nav-burger span:nth-child(3) { transform: translateY(-0.4rem) rotate(-45deg); }
-
-/* Nav (desktop default) */
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.5rem, 2vw, 1.75rem);
-  flex: 1;
-  justify-content: flex-end;
-}
-.site-nav__link {
-  position: relative;
-  padding: 0.5rem 0.25rem;
-  color: #d8d8d8;
-  font-size: 0.92rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.site-nav__link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: #c9a227;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-.site-nav__link:hover { color: #e8c766; }
-.site-nav__link:hover::after { transform: scaleX(1); }
-.site-nav__link i { margin-right: 0.3rem; }
-
-.site-nav__actions {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-left: clamp(0rem, 1vw, 1rem);
-}
-
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
 .btn-ghost,
 .btn-solid {
   padding: 0.55rem 1.1rem;
@@ -209,34 +153,25 @@
   letter-spacing: 0.03em;
   text-decoration: none;
   white-space: nowrap;
-<<<<<<< HEAD
   transition:
     transform 0.2s ease,
     background 0.2s ease,
     color 0.2s ease,
     border-color 0.2s ease;
-=======
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
 }
 .btn-ghost {
   color: #e8c766;
   border: 1px solid rgba(201, 162, 39, 0.5);
 }
-<<<<<<< HEAD
 .btn-ghost:hover {
   background: rgba(201, 162, 39, 0.12);
   border-color: #c9a227;
 }
-=======
-.btn-ghost:hover { background: rgba(201, 162, 39, 0.12); border-color: #c9a227; }
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
 .btn-solid {
   color: #1a1207;
   background: linear-gradient(135deg, #e8c766, #c9a227);
   border: 1px solid transparent;
 }
-<<<<<<< HEAD
 .btn-solid:hover {
   transform: translateY(-1px);
   background: linear-gradient(135deg, #f1d47f, #d4ad2c);
@@ -253,19 +188,6 @@
   .nav-burger {
     display: flex;
   }
-=======
-.btn-solid:hover { transform: translateY(-1px); background: linear-gradient(135deg, #f1d47f, #d4ad2c); }
-
-.user-chip {
-  color: #e8c766;
-  font-size: 0.88rem;
-  font-weight: 600;
-}
-
-/* ===== Tablet & phone: collapsible menu ===== */
-@media (max-width: 62rem) {
-  .nav-burger { display: flex; }
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
 
   .site-nav {
     position: absolute;
@@ -280,13 +202,9 @@
     border-bottom: 1px solid rgba(201, 162, 39, 0.35);
     max-height: 0;
     overflow: hidden;
-<<<<<<< HEAD
     transition:
       max-height 0.35s ease,
       padding 0.35s ease;
-=======
-    transition: max-height 0.35s ease, padding 0.35s ease;
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
   }
   .nav-toggle:checked ~ .site-nav {
     max-height: 30rem;
@@ -298,13 +216,9 @@
     font-size: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
-<<<<<<< HEAD
   .site-nav__link::after {
     display: none;
   }
-=======
-  .site-nav__link::after { display: none; }
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
   .site-nav__actions {
     margin: 1rem 0 0;
     flex-wrap: wrap;
@@ -315,11 +229,7 @@
     text-align: center;
     padding: 0.8rem 1rem;
   }
-<<<<<<< HEAD
   .user-chip {
     flex: 1 1 100%;
   }
-=======
-  .user-chip { flex: 1 1 100%; }
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
 }

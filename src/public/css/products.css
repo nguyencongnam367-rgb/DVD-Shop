@@ -1,15 +1,13 @@
-<<<<<<< HEAD
-
-=======
 /* ===== Products page: synced with site header/footer (gold + Playfair) ===== */
->>>>>>> 1b2c821cbcc5d33b9cb350e29faa5868987cf37b
 .pp {
   max-width: 80rem;
   margin: 0 auto;
   padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
 }
 
-.pp-head { margin-bottom: clamp(1rem, 3vw, 1.75rem); }
+.pp-head {
+  margin-bottom: clamp(1rem, 3vw, 1.75rem);
+}
 .pp-kicker {
   margin: 0 0 0.35rem;
   font-size: 0.75rem;
@@ -31,7 +29,11 @@
   margin-top: 0.6rem;
   background: #c9a227;
 }
-.pp-count { margin: 0.6rem 0 0; font-size: 0.9rem; color: #8f8f8f; }
+.pp-count {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  color: #8f8f8f;
+}
 
 /* Toolbar */
 .pp-toolbar {
@@ -49,10 +51,17 @@
   background: #141414;
   border: 1px solid rgba(201, 162, 39, 0.3);
   border-radius: 0.5rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
-.pp-search:focus-within { border-color: #c9a227; box-shadow: 0 0 0 0.2rem rgba(201, 162, 39, 0.15); }
-.pp-search i { color: #c9a227; }
+.pp-search:focus-within {
+  border-color: #c9a227;
+  box-shadow: 0 0 0 0.2rem rgba(201, 162, 39, 0.15);
+}
+.pp-search i {
+  color: #c9a227;
+}
 .pp-search input {
   flex: 1;
   min-width: 0;
@@ -72,7 +81,10 @@
   border-radius: 0.5rem;
   font-size: 0.9rem;
 }
-.pp-submit { border: 0; cursor: pointer; }
+.pp-submit {
+  border: 0;
+  cursor: pointer;
+}
 
 /* Category chips: wrap on desktop, horizontal scroll on phone */
 .pp-chips {
@@ -89,10 +101,21 @@
   color: #d0d0d0;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
-.pp-chip:hover { border-color: #c9a227; color: #e8c766; }
-.pp-chip.is-active { background: #c9a227; border-color: #c9a227; color: #1a1207; font-weight: 700; }
+.pp-chip:hover {
+  border-color: #c9a227;
+  color: #e8c766;
+}
+.pp-chip.is-active {
+  background: #c9a227;
+  border-color: #c9a227;
+  color: #1a1207;
+  font-weight: 700;
+}
 
 /* ===== Grid ===== */
 .pp-grid {
@@ -115,7 +138,11 @@
   background: #1c1c1c;
   border-radius: 0.4rem;
 }
-.pp-card__poster { display: block; width: 100%; height: 100%; }
+.pp-card__poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .pp-card__poster img {
   width: 100%;
   height: 100%;
@@ -123,7 +150,9 @@
   display: block;
   transition: transform 0.5s ease;
 }
-.pp-card:hover .pp-card__poster img { transform: scale(1.06); }
+.pp-card:hover .pp-card__poster img {
+  transform: scale(1.06);
+}
 
 /* Hover overlay with heart / eye, fades + slides up like the reference shot */
 .pp-card__overlay {
@@ -139,7 +168,9 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.55), transparent);
   opacity: 0;
   transform: translateY(0.5rem);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 .pp-card:hover .pp-card__overlay,
 .pp-card:focus-within .pp-card__overlay {
@@ -158,10 +189,20 @@
   font-size: 0.9rem;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
-.pp-icon-btn:hover { background: #c9a227; color: #1a1207; transform: translateY(-0.1rem); }
-.pp-icon-sep { color: #e8c766; font-weight: 300; }
+.pp-icon-btn:hover {
+  background: #c9a227;
+  color: #1a1207;
+  transform: translateY(-0.1rem);
+}
+.pp-icon-sep {
+  color: #e8c766;
+  font-weight: 300;
+}
 
 /* Body: separated visually from the image, like a distinct info panel */
 .pp-card__body {
@@ -186,16 +227,25 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.pp-card__name a:hover { color: #e8c766; }
+.pp-card__name a:hover {
+  color: #e8c766;
+}
 .pp-card__price {
   margin: 0.5rem 0 0;
   font-weight: 700;
   font-size: 0.95rem;
   color: #e8c766;
 }
-.pp-card__price s { margin-left: 0.35rem; font-size: 0.78rem; font-weight: 400; color: #777; }
+.pp-card__price s {
+  margin-left: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #777;
+}
 
-.pp-card__form { margin-top: 0.9rem; }
+.pp-card__form {
+  margin-top: 0.9rem;
+}
 .pp-card__btn {
   width: 100%;
   padding: 0.7rem 0.5rem;
@@ -208,29 +258,69 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
-.pp-card__btn:hover { background: #c9a227; color: #1a1207; border-color: #c9a227; }
+.pp-card__btn:hover {
+  background: #c9a227;
+  color: #1a1207;
+  border-color: #c9a227;
+}
 
-.pp-empty { grid-column: 1 / -1; padding: 3rem 0; text-align: center; color: #9a9a9a; }
+.pp-empty {
+  grid-column: 1 / -1;
+  padding: 3rem 0;
+  text-align: center;
+  color: #9a9a9a;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 36rem) {
-  .pp-toolbar { gap: 0.5rem; }
-  .pp-select { flex: 1 1 8rem; }
-  .pp-submit { flex: 0 0 auto; padding: 0.7rem 1.2rem; }
-  .pp-chips { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * clamp(1rem, 4vw, 2rem)); padding-inline: clamp(1rem, 4vw, 2rem); scrollbar-width: none; }
-  .pp-chips::-webkit-scrollbar { display: none; }
-  .pp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 0.75rem; }
+  .pp-toolbar {
+    gap: 0.5rem;
+  }
+  .pp-select {
+    flex: 1 1 8rem;
+  }
+  .pp-submit {
+    flex: 0 0 auto;
+    padding: 0.7rem 1.2rem;
+  }
+  .pp-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(-1 * clamp(1rem, 4vw, 2rem));
+    padding-inline: clamp(1rem, 4vw, 2rem);
+    scrollbar-width: none;
+  }
+  .pp-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .pp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 0.75rem;
+  }
   /* touch devices have no hover: keep the overlay visible instead of hidden */
-  .pp-card__overlay { opacity: 1; transform: none; background: linear-gradient(0deg, rgba(0,0,0,0.45), transparent); }
+  .pp-card__overlay {
+    opacity: 1;
+    transform: none;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), transparent);
+  }
 }
 @media (min-width: 36.01rem) and (max-width: 62rem) {
-  .pp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pp-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 @media (min-width: 62.01rem) {
-  .pp-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pp-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 @media (min-width: 90rem) {
-  .pp-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .pp-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
