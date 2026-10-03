@@ -1,0 +1,174 @@
+=================================================================
+ CẤU TRÚC CƠ SỞ DỮ LIỆU MONGODB - WEBSITE BÁN DVD (DVD-SHOP)
+=================================================================
+Database name: dvdshop
+Kiểu DB: MongoDB (NoSQL - dạng document)
+Mô hình ứng dụng: MVC (Model - View - Controller), Node.js + Express
+View engine: express-handlebars
+
+Ghi chú: Cấu trúc dưới đây được thiết kế bám theo các yêu cầu chức năng:
+Trang chủ, Trang chi tiết sản phẩm, Đăng nhập, Đăng ký, Quản trị trang
+web, Giỏ hàng, và các thao tác Thêm/Sửa/Xoá/Đăng nhập/Đăng ký/Mua hàng.
+
+-----------------------------------------------------------------
+1. COLLECTION: users
+-----------------------------------------------------------------
+Mục đích: Lưu tài khoản người dùng, phục vụ đăng ký / đăng nhập /
+           phân quyền (user thường >< admin quản trị).
+
+{
+  _id           : ObjectId,          // khoá chính, tự sinh
+  username      : String,            // tên đăng nhập, unique, required
+  email         : String,            // email, unique, required
+  password      : String,            // mật khẩu đã mã hoá (bcrypt hash)
+  fullName      : String,            // họ tên hiển thị
+  phone         : String,            // số điện thoại
+  address       : String,            // địa chỉ giao hàng
+  role          : String,            // "user" | "admin"  (default: "user")
+  avatar        : String,            // đường dẫn ảnh đại diện (tuỳ chọn)
+  isActive      : Boolean,           // khoá/mở tài khoản (default: true)
+  createdAt     : Date,              // tự sinh (timestamps)
+  updatedAt     : Date               // tự sinh (timestamps)
+}
+
+Index đề xuất:
+  - username: unique
+  - email: unique
+
+-----------------------------------------------------------------
+2. COLLECTION: categories
+-----------------------------------------------------------------
+Mục đích: Thể loại DVD (Hành động, Hoạt hình, Kinh dị, Tình cảm...)
+           để lọc/hiển thị ở trang chủ.
+
+{
+  _id           : ObjectId,
+  name          : String,            // Tên thể loại, required, unique
+  slug          : String,            // dùng cho URL: /the-loai/hanh-dong
+  description   : String,            // mô tả ngắn (tuỳ chọn)
+  createdAt     : Date,
+  updatedAt     : Date
+}
+
+-----------------------------------------------------------------
+3. COLLECTION: products   (Sản phẩm - đĩa DVD)
+-----------------------------------------------------------------
+Mục đích: Lưu thông tin từng đĩa DVD, hiển thị ở Trang chủ và
+           Trang chi tiết sản phẩm; là đối tượng của Thêm/Sửa/Xoá.
+
+{
+  _id           : ObjectId,
+  name          : String,            // Tên phim/DVD, required
+  slug          : String,            // dùng cho URL thân thiện
+  categoryId    : ObjectId,          // ref -> categories._id
+  director      : String,            // Đạo diễn
+  actors        : [String],          // Danh sách diễn viên
+  releaseYear   : Number,            // Năm phát hành
+  duration      : Number,            // Thời lượng phim (phút)
+  language      : String,            // Ngôn ngữ / phụ đề
+  price         : Number,            // Giá bán, required
+  discountPrice : Number,            // Giá khuyến mãi (tuỳ chọn)
+  stock         : Number,            // Số lượng tồn kho
+  image         : String,            // Ảnh bìa chính
+  gallery       : [String],          // Ảnh phụ (nếu có nhiều ảnh)
+  description   : String,            // Mô tả chi tiết sản phẩm
+  soldCount     : Number,            // Số lượng đã bán (thống kê)
+  isFeatured    : Boolean,           // Sản phẩm nổi bật ở trang chủ
+  isActive      : Boolean,           // Còn bán / đã ẩn
+  createdAt     : Date,
+  updatedAt     : Date
+}
+
+Index đề xuất:
+  - name: text index (tìm kiếm sản phẩm)
+  - categoryId: index (lọc theo thể loại)
+
+-----------------------------------------------------------------
+4. COLLECTION: carts   (Giỏ hàng)
+-----------------------------------------------------------------
+Mục đích: Mỗi user có 1 giỏ hàng đang hoạt động (trước khi đặt hàng).
+           Có thể lưu trong DB (nếu yêu cầu giữ giỏ hàng lâu dài)
+           hoặc lưu tạm ở session - tuỳ cách bạn triển khai.
+
+{
+  _id           : ObjectId,
+  userId        : ObjectId,          // ref -> users._id
+  items         : [
+    {
+      productId   : ObjectId,        // ref -> products._id
+      name        : String,          // lưu tạm tên SP tại thời điểm thêm
+      price       : Number,          // giá tại thời điểm thêm giỏ
+      image       : String,
+      quantity    : Number
+    }
+  ],
+  updatedAt     : Date
+}
+
+-----------------------------------------------------------------
+5. COLLECTION: orders   (Đơn hàng - khi bấm "Mua hàng")
+-----------------------------------------------------------------
+Mục đích: Lưu lại lịch sử đơn hàng sau khi người dùng thanh toán/
+           đặt mua từ giỏ hàng.
+
+{
+  _id             : ObjectId,
+  orderCode       : String,          // Mã đơn hàng, unique
+  userId          : ObjectId,        // ref -> users._id
+  items           : [
+    {
+      productId     : ObjectId,      // ref -> products._id
+      name          : String,
+      price         : Number,        // đơn giá lúc mua
+      quantity      : Number,
+      subTotal      : Number         // price * quantity
+    }
+  ],
+  totalAmount     : Number,          // tổng tiền đơn hàng
+  receiverName    : String,          // tên người nhận
+  receiverPhone   : String,
+  shippingAddress : String,
+  paymentMethod   : String,          // "COD" | "Chuyển khoản" ...
+  status          : String,          // "Chờ xử lý" | "Đang giao" |
+                                      // "Hoàn thành" | "Đã huỷ"
+  createdAt       : Date,
+  updatedAt       : Date
+}
+
+-----------------------------------------------------------------
+ SƠ ĐỒ QUAN HỆ (RELATIONSHIP - dùng ObjectId reference)
+-----------------------------------------------------------------
+
+  users (1) ─────< (n) orders
+  users (1) ─────< (1) carts
+  categories (1) ─< (n) products
+  products (1) ───< (n) cart.items / order.items
+
+  Ký hiệu:  (1)───<(n)  nghĩa là "một - nhiều"
+
+-----------------------------------------------------------------
+ ÁNH XẠ SANG CHỨC NĂNG TRONG ĐỀ BÀI
+-----------------------------------------------------------------
+  - Trang chủ            -> đọc dữ liệu từ "products" (+ "categories")
+  - Trang chi tiết SP     -> đọc 1 document trong "products" theo _id/slug
+  - Đăng nhập/Đăng ký     -> collection "users"
+  - Giỏ hàng              -> collection "carts" (hoặc session)
+  - Mua hàng              -> tạo mới document trong "orders",
+                             cập nhật "stock" & "soldCount" trong "products"
+  - Thêm/Sửa/Xoá (Admin)  -> CRUD trực tiếp trên "products" (và
+                             "categories", "orders" nếu cần quản lý)
+  - Quản trị trang web    -> route riêng /admin, chỉ cho phép
+                             user có role = "admin" truy cập
+
+-----------------------------------------------------------------
+ GHI CHÚ TRIỂN KHAI VỚI MONGOOSE (Node.js)
+-----------------------------------------------------------------
+  - Mỗi collection ở trên tương ứng 1 Schema/Model trong thư mục
+    /models (models/User.js, models/Product.js, models/Category.js,
+    models/Cart.js, models/Order.js) theo đúng mô hình MVC.
+  - Dùng { timestamps: true } trong Schema để Mongoose tự sinh
+    createdAt / updatedAt.
+  - Dùng populate() để lấy dữ liệu liên kết, ví dụ:
+    Product.find().populate('categoryId')
+    Order.find().populate('userId').populate('items.productId')
+=================================================================

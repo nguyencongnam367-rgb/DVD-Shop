@@ -8,15 +8,15 @@
   </div>
 
   <nav class="nav">
-    <a class="nav-item active" href="/admin/dashboard"><i
+    <a class="nav-item{{#if (eq adminActive "dashboard")}} active{{/if}}" href="/admin/dashboard"><i
         class="fa-solid fa-house"
       ></i>
       Trang chủ</a>
-    <a class="nav-item" href="/admin/users"><i class="fa-solid fa-user"></i>
+    <a class="nav-item{{#if (eq adminActive "users")}} active{{/if}}" href="/admin/users"><i class="fa-solid fa-user"></i>
       Khách hàng</a>
-    <a class="nav-item" href="/admin/products"><i class="fa-solid fa-box"></i>
+    <a class="nav-item{{#if (eq adminActive "products")}} active{{/if}}" href="/admin/products"><i class="fa-solid fa-box"></i>
       DVD</a>
-    <a class="nav-item" href="/admin/orders"><i
+    <a class="nav-item{{#if (eq adminActive "orders")}} active{{/if}}" href="/admin/orders"><i
         class="fa-solid fa-cart-shopping"
       ></i>
       Đơn hàng</a>

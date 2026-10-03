@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "6ab1db47b1cd9a22ea12b9ee"
+  },
+  "username": "admin",
+  "email": "admin@gmail.com",
+  "password": "$2a$10$vx7iF4XvmNbNYyA5OE6/N.9YvdsXQft8qjiYDv/lLTzm7XjBP1z5a",
+  "fullName": "Administrator",
+  "phone": "0901234567",
+  "address": "Ha Noi",
+  "role": "admin",
+  "avatar": "",
+  "isActive": true,
+  "updatedAt": {
+    "$date": "2026-10-02T12:59:26.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6ab1db5fb1cd9a22ea12b9f0"
+  },
+  "username": "user",
+  "email": "user@gmail.com",
+  "password": "$2a$10$7vmMGOfk/Ng64o7CtywAeeXU8nA.MAoya.7z/HmzR8EqduoMQStzK",
+  "fullName": "Nguyen Van A",
+  "phone": "0912345678",
+  "address": "Ha Noi",
+  "role": "user",
+  "avatar": "",
+  "isActive": true,
+  "updatedAt": {
+    "$date": "2026-10-02T12:59:26.678Z"
+  }
+}]

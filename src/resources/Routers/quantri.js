@@ -11,6 +11,12 @@ function requireAdmin(req, res, next) {
 }
 
 router.use(requireAdmin);
+router.use((req, res, next) => {
+  const section = req.path.split("/")[1];
+  res.locals.adminActive = section === "products" ? "products" : section;
+  next();
+});
+
 router.get("/dashboard", quantriController.dashboard);
 router.get("/users", quantriController.users);
 router.get("/products", quantriController.products);
