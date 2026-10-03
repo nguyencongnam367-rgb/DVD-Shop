@@ -1,11 +1,11 @@
 <aside class="sidebar">
-  <div class="brand">
+  <a class="brand" href="/admin/dashboard" aria-label="DVDShop Admin - Trang chủ">
     <div class="brand-mark">D</div>
     <div class="brand-text">
-      DVDShop Admin
+      DVDShop <span>Admin</span>
       <small>Management</small>
     </div>
-  </div>
+  </a>
 
   <nav class="nav">
     <a class="nav-item{{#if (eq adminActive "dashboard")}} active{{/if}}" href="/admin/dashboard"><i
@@ -20,7 +20,7 @@
         class="fa-solid fa-cart-shopping"
       ></i>
       Đơn hàng</a>
-    <a class="nav-item" href="#"><i class="fa-solid fa-chart-column"></i>
+    <a class="nav-item{{#if (eq adminActive "reports")}} active{{/if}}" href="/admin/reports"><i class="fa-solid fa-chart-column"></i>
       Báo cáo</a>
     <a class="nav-item" href="#"><i class="fa-solid fa-gear"></i> Cài đặt</a>
     <a class="nav-item" href="/auth/logout"><i

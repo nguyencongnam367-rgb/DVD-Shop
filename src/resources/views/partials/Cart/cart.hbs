@@ -4,6 +4,14 @@
     <a href="/products" class="ghost-btn" style="width:auto; margin:0; padding:10px 14px;">Tiếp tục mua sắm</a>
   </div>
 
+  {{#if notice}}<p class="checkout-notice" role="status">{{notice}}</p>{{/if}}
+  {{#if loginRequired}}
+    <p class="checkout-notice" role="status">
+      Vui lòng đăng nhập để xem giỏ hàng và tiếp tục thanh toán.
+      <a href="/cart/checkout">Đăng nhập để thanh toán</a>
+    </p>
+  {{/if}}
+
   <div class="cart-layout">
     <div class="cart-items">
       {{#each cartItems}}
@@ -12,6 +20,7 @@
         <div>
           <h4>{{this.name}}</h4>
           <div class="cart-small">Số lượng: {{this.quantity}}</div>
+          {{#unless this.available}}<div class="cart-unavailable">Sản phẩm hiện không còn đủ hàng.</div>{{/unless}}
           <div class="price-row"><span class="price-tag">{{formatVND this.price}}</span></div>
         </div>
         <div class="price-tag">{{formatVND (mul this.price this.quantity)}}</div>
@@ -27,7 +36,11 @@
       <div class="summary-row"><span>Phí vận chuyển</span><strong>{{formatVND shipping}}</strong></div>
       <div class="summary-row"><span>Giảm giá</span><strong>-{{formatVND discount}}</strong></div>
       <div class="summary-row total"><span>Tổng cộng</span><span>{{formatVND total}}</span></div>
-      <button class="primary-btn">Tiến hành thanh toán</button>
+      {{#if cartItems.length}}
+      <form action="/cart/checkout" method="GET">
+        <button class="primary-btn" type="submit" {{#unless canCheckout}}disabled{{/unless}}>Tiến hành thanh toán</button>
+      </form>
+      {{/if}}
     </aside>
   </div>
 </div>

@@ -1,9 +1,29 @@
-<section class="hero">
-  <div class="hero-content">
-    <h1 class="hero-title">THE CINEMATIC COLLECTION.</h1>
-    <p class="hero-subtitle">Curated. Cult. Classic.</p>
-    <a href="#" class="btn-orange">EXPLORE NOW</a>
-  </div>
+<section class="hero" aria-label="Phim được xem nhiều">
+  {{#each popularProducts}}
+    <article class="hero-slide{{#if @first}} is-active{{/if}}" aria-hidden="{{#if @first}}false{{else}}true{{/if}}">
+      <img class="hero-slide__image" src="{{this.image}}" alt="" />
+      <div class="hero-content">
+        <p class="hero-subtitle">PHIM ĐƯỢC QUAN TÂM</p>
+        <h1 class="hero-title">{{this.name}}</h1>
+        <p class="hero-subtitle">{{this.director}}</p>
+        <a href="/product/{{this._id}}" class="btn-orange">XEM CHI TIẾT</a>
+      </div>
+    </article>
+  {{else}}
+    <div class="hero-content">
+      <h1 class="hero-title">THE CINEMATIC COLLECTION.</h1>
+      <p class="hero-subtitle">Curated. Cult. Classic.</p>
+      <a href="/products" class="btn-orange">KHÁM PHÁ NGAY</a>
+    </div>
+  {{/each}}
+  {{#if popularProducts.length}}
+    <button type="button" class="hero-control hero-control--previous" aria-label="Phim trước">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button type="button" class="hero-control hero-control--next" aria-label="Phim tiếp theo">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  {{/if}}
 </section>
 
 <main class="section-container">
@@ -12,7 +32,7 @@
   <div class="movie-grid">
     {{#each products}}
       <div class="movie-card">
-        <a href="/home/{{this.slug}}">
+        <a href="/product/{{this._id}}">
           <div class="poster-box">
             <img src="{{this.image}}" alt="{{this.name}}" />
           </div>
@@ -41,3 +61,6 @@
     {{/each}}
   </div>
 </main>
+{{#if popularProducts.length}}
+<script src="/js/home-slider.js" defer></script>
+{{/if}}

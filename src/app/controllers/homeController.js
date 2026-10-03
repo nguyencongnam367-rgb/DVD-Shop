@@ -1,12 +1,17 @@
-const homeModel = require("../models/HomeModel");
+const Product = require("../models/ProductModel");
 
 class HomeController {
   async index(req, res) {
     try {
-      const products = await homeModel
+      const products = await Product
         .find({ isActive: { $ne: false } })
+        .sort({ viewCount: -1, soldCount: -1 })
         .lean();
-      return res.render("home", { products, layout: "main" });
+      return res.render("home", {
+        products,
+        popularProducts: products.slice(0, 5),
+        layout: "main",
+      });
     } catch (error) {
       console.error("Không thể tải sản phẩm trang chủ:", error.message);
       return res.status(500).json({ error: "Không thể tải dữ liệu sản phẩm" });
@@ -15,13 +20,16 @@ class HomeController {
 
   async show(req, res) {
     try {
-      const product = await homeModel.findOne({ slug: req.params.slug }).lean();
+      const product = await Product.findOne(
+        { slug: req.params.slug, isActive: { $ne: false } },
+        { _id: 1 },
+      ).lean();
 
       if (!product) {
         return res.status(404).send("Không tìm thấy sản phẩm");
       }
 
-      return res.render("products_detail", { product, layout: "main" });
+      return res.redirect(`/product/${product._id}`);
     } catch (error) {
       console.error("Không thể tải chi tiết sản phẩm:", error.message);
       return res.status(500).json({ error: "Không thể tải dữ liệu sản phẩm" });

@@ -39,7 +39,11 @@
             <tr>
                 <td>
                     <div class="product">
+                        {{#if this.image}}
+                        <img class="thumb thumb-image" src="{{this.image}}" alt="Ảnh {{this.name}}" loading="lazy">
+                        {{else}}
                         <div class="thumb">{{initial this.name}}</div>
+                        {{/if}}
                         <div>
                             <strong>{{this.name}}</strong>
                         </div>
@@ -59,7 +63,12 @@
                     <span class="pill yellow">Hết hàng</span>
                     {{/if}}
                 </td>
-                <td><a class="admin-table-action" href="/admin/products/{{this._id}}/upgrade">Sửa</a></td>
+                <td class="admin-product-actions">
+                    <a class="admin-table-action" href="/admin/products/{{this._id}}/upgrade">Sửa</a>
+                    <form method="POST" action="/admin/products/{{this._id}}/delete" onsubmit="return confirm('Bạn có chắc muốn xóa DVD này?')">
+                        <button class="admin-table-action admin-table-action--delete" type="submit">Xóa</button>
+                    </form>
+                </td>
             </tr>
             {{else}}
             <tr>

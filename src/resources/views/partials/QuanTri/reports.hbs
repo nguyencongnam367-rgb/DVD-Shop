@@ -1,0 +1,70 @@
+{{>header}}
+
+<header class="topbar">
+  <div class="report-heading">
+    <span class="report-kicker">THỐNG KÊ CỬA HÀNG</span>
+    <h1 class="report-title">Báo cáo</h1>
+    <p class="report-description">Theo dõi doanh thu và tồn kho của cửa hàng DVD.</p>
+  </div>
+  <div class="top-actions">
+    <div class="user-card">
+      <div class="avatar">{{initial currentUser.username}}</div>
+      <div><div class="user-name">{{currentUser.username}}</div><small>Admin</small></div>
+    </div>
+  </div>
+</header>
+
+<section class="stats-grid report-stats" aria-label="Thống kê báo cáo">
+  <article class="stat-card">
+    <div class="stat-top">
+      <h2>Doanh thu</h2>
+      <div class="icon-box orange"><i class="fa-solid fa-sack-dollar"></i></div>
+    </div>
+    <p class="value">{{formatVND totalRevenue}}</p>
+    <p class="report-note">Từ {{totalReportOrders}} đơn hàng, không gồm đơn đã hủy.</p>
+  </article>
+
+  <article class="stat-card">
+    <div class="stat-top">
+      <h2>Tổng số lượng sản phẩm</h2>
+      <div class="icon-box green"><i class="fa-solid fa-boxes-stacked"></i></div>
+    </div>
+    <p class="value">{{totalProductQuantity}}</p>
+    <p class="report-note">Tồn kho của {{totalProductTypes}} mặt hàng đang quản lý.</p>
+  </article>
+
+  <article class="stat-card report-card--orders">
+    <div class="stat-top">
+      <h2>Đơn hàng hợp lệ</h2>
+      <div class="icon-box blue"><i class="fa-solid fa-receipt"></i></div>
+    </div>
+    <p class="value">{{totalReportOrders}}</p>
+    <p class="report-note">Đơn hàng chưa bị hủy.</p>
+  </article>
+</section>
+
+<section class="report-panel" aria-labelledby="revenue-chart-title">
+  <div class="report-panel__heading">
+    <div>
+      <span class="report-kicker">TỔNG QUAN</span>
+      <h2 id="revenue-chart-title">Doanh thu theo tháng</h2>
+    </div>
+    <span class="report-period">6 tháng gần nhất</span>
+  </div>
+  <div class="report-chart" role="img" aria-label="Biểu đồ doanh thu 6 tháng gần nhất">
+    {{#each monthlyRevenue}}
+      <div class="report-chart__column" aria-label="{{this.label}}: {{formatVND this.total}}">
+        <span class="report-chart__value">{{formatVND this.total}}</span>
+        <div class="report-chart__track">
+          <div class="report-chart__bar" style="height: {{this.barHeight}}%"></div>
+        </div>
+        <span class="report-chart__label">{{this.label}}</span>
+      </div>
+    {{/each}}
+  </div>
+</section>
+
+<section class="report-footnote">
+  <i class="fa-solid fa-circle-info"></i>
+  <p>Doanh thu được cộng từ các đơn hàng chưa bị hủy. Số lượng sản phẩm là tổng tồn kho hiện tại.</p>
+</section>

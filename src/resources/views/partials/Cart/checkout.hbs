@@ -1,0 +1,67 @@
+<main class="checkout-page">
+  <section class="checkout-shell">
+    <div class="cart-header">
+      <div>
+        <p class="checkout-kicker">DVDShop</p>
+        <h1 class="cart-title">Hoàn tất đơn hàng</h1>
+      </div>
+      <a href="/cart" class="ghost-btn checkout-back">Quay lại giỏ hàng</a>
+    </div>
+
+    {{#if error}}<p class="checkout-error" role="alert">{{error}}</p>{{/if}}
+
+    <div class="checkout-layout">
+      <form class="checkout-form" action="/cart/checkout" method="POST">
+        <section class="checkout-panel">
+          <h2>Thông tin nhận hàng</h2>
+          <label class="checkout-field">
+            <span>Họ và tên người nhận</span>
+            <input type="text" name="receiverName" value="{{receiverName}}" maxlength="120" autocomplete="name" required />
+          </label>
+          <label class="checkout-field">
+            <span>Số điện thoại</span>
+            <input type="tel" name="receiverPhone" value="{{receiverPhone}}" maxlength="20" autocomplete="tel" required />
+          </label>
+          <label class="checkout-field">
+            <span>Địa chỉ giao hàng</span>
+            <textarea name="shippingAddress" rows="3" maxlength="500" autocomplete="street-address" required>{{shippingAddress}}</textarea>
+          </label>
+        </section>
+
+        <section class="checkout-panel">
+          <h2>Phương thức thanh toán</h2>
+          <label class="checkout-payment">
+            <input type="radio" name="paymentMethod" value="COD" checked />
+            <span>
+              <strong>Thanh toán khi nhận hàng (COD)</strong>
+              <small>Thanh toán trực tiếp cho nhân viên giao hàng khi nhận DVD.</small>
+            </span>
+          </label>
+        </section>
+
+        <button class="primary-btn checkout-submit" type="submit" {{#unless canCheckout}}disabled{{/unless}}>
+          Đặt hàng · {{formatVND total}}
+        </button>
+      </form>
+
+      <aside class="checkout-panel checkout-summary">
+        <h2>Đơn hàng của bạn</h2>
+        <div class="checkout-items">
+          {{#each cartItems}}
+          <div class="checkout-item">
+            <div class="checkout-item__details">
+              <strong>{{this.name}}</strong>
+              <small>Số lượng: {{this.quantity}} · {{formatVND this.price}}/DVD</small>
+              {{#unless this.available}}<small class="checkout-item__unavailable">Không đủ hàng; vui lòng cập nhật giỏ hàng.</small>{{/unless}}
+            </div>
+            <span>{{formatVND this.lineTotal}}</span>
+          </div>
+          {{/each}}
+        </div>
+        <div class="summary-row"><span>Tạm tính</span><strong>{{formatVND subtotal}}</strong></div>
+        <div class="summary-row"><span>Phí vận chuyển</span><strong>{{formatVND shipping}}</strong></div>
+        <div class="summary-row total"><span>Tổng cộng</span><span>{{formatVND total}}</span></div>
+      </aside>
+    </div>
+  </section>
+</main>

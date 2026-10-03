@@ -8,14 +8,47 @@ class AuthController {
 
   async login(req, res) {
     try {
-      const { username, password } = req.body;
-      const user = await User.findOne({ username });
-      if (!user || !user.isActive || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).send("Sai tên đăng nhập hoặc mật khẩu");
+      const identifier =
+        typeof req.body.username === "string" ? req.body.username.trim() : "";
+      const password =
+        typeof req.body.password === "string" ? req.body.password : "";
+
+      if (!identifier || !password) {
+        return res.status(401).render("login", {
+          layout: "main",
+          error: "Vui lòng nhập tên đăng nhập và mật khẩu.",
+          username: identifier,
+        });
+      }
+
+      const user = await User.findOne({
+        $or: [
+          { username: identifier },
+          { email: identifier.toLowerCase() },
+        ],
+      });
+      if (
+        !user ||
+        user.isActive === false ||
+        !(await bcrypt.compare(password, user.password))
+      ) {
+        return res.status(401).render("login", {
+          layout: "main",
+          error: "Tên đăng nhập hoặc mật khẩu không chính xác.",
+          username: identifier,
+        });
       }
       req.session.userId = user._id.toString();
       req.session.user = { username: user.username, role: user.role };
-      return res.redirect(user.role === "admin" ? "/admin/dashboard" : "/");
+      const returnTo = req.session.returnTo;
+      delete req.session.returnTo;
+      return res.redirect(
+        user.role === "admin"
+          ? "/admin/dashboard"
+          : returnTo === "/cart/checkout"
+            ? returnTo
+            : "/",
+      );
     } catch (error) {
       console.error("Lỗi đăng nhập:", error.message);
       return res.status(500).send("Lỗi hệ thống");

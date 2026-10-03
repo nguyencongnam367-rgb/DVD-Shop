@@ -1,5 +1,5 @@
 :root {
-  --font-sans: "Be Vietnam Pro", sans-serif;
+  --font-sans: "Inter", sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
   --text-soft: #c7c7c7;
 
@@ -71,6 +71,8 @@ body a:visited {
 
 .hero {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: clamp(18.75rem, 45vw, 26.875rem);
   background:
     linear-gradient(
@@ -85,7 +87,47 @@ body a:visited {
   padding: 2rem clamp(1.125rem, 5vw, 5rem);
 }
 
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 2rem clamp(1.125rem, 5vw, 5rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero-slide__image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to right,
+    rgba(18, 18, 18, 0.96) 20%,
+    rgba(18, 18, 18, 0.72) 52%,
+    rgba(18, 18, 18, 0.16) 100%
+  );
+}
+
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: min(100%, 500px);
 }
 
@@ -119,6 +161,35 @@ body a:visited {
   border-radius: 3px;
   cursor: pointer;
   display: inline-block;
+}
+
+.hero-control {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.hero-control:hover {
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+}
+
+.hero-control--previous {
+  left: 1rem;
+}
+
+.hero-control--next {
+  right: 1rem;
 }
 
 .btn-red:hover {
@@ -167,6 +238,19 @@ body a:visited {
     max-width: 100%;
   }
 
+  .hero-control--previous {
+    left: 0.5rem;
+  }
+
+  .hero-control--next {
+    right: 0.5rem;
+  }
+
+  .hero-slide {
+    padding-right: 3.75rem;
+    padding-left: 3.75rem;
+  }
+
   .movie-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
@@ -190,16 +274,21 @@ body a:visited {
     padding: 10px;
   }
 
+  .movie-card form {
+    margin-top: auto;
+  }
+
   .poster-box {
     height: 220px;
   }
 }
 
 .movie-card {
-  background: rgba(20, 18, 10, 0.96);
-  border: 1px solid var(--gold-dim);
+  background: #1e1e1e;
+  border: 0;
   border-radius: 0.875rem;
   padding: 0.75rem;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -211,7 +300,6 @@ body a:visited {
 }
 
 .movie-card:hover {
-  border-color: var(--gold-dim-strong);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
   transform: translateY(-2px);
 }
@@ -251,8 +339,11 @@ body a:visited {
   font-weight: 700;
   line-height: 1.45;
   color: #fff;
-  white-space: nowrap;
+  display: -webkit-box;
+  min-height: 2.5em;
   overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
 }
 
@@ -265,14 +356,16 @@ body a:visited {
 
 .movie-price {
   margin-top: 0.5rem;
+  min-height: 1.5em;
   font-size: 0.85rem;
-  color: var(--gold-soft);
+  color: #fff;
   font-weight: 700;
 }
 
 .btn-add-cart {
   width: 100%;
   margin-top: 0.75rem;
+  min-height: 2.6rem;
   padding: 0.625rem 0.75rem;
   border: none;
   border-radius: 0.25rem;
@@ -283,12 +376,33 @@ body a:visited {
   letter-spacing: 0.05rem;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
+  opacity: 0;
+  transform: translateY(0.35rem);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.movie-card:hover .btn-add-cart,
+.movie-card:focus-within .btn-add-cart {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .btn-add-cart:hover {
   background: linear-gradient(135deg, var(--gold-soft), var(--gold));
   transform: translateY(-1px);
+}
+
+@media (hover: none) {
+  .movie-card .btn-add-cart {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
 }
 
 .auth-page {
@@ -334,6 +448,16 @@ body a:visited {
   line-height: 1.6;
   color: #cfcfcf;
   margin-bottom: 24px;
+}
+
+.auth-error {
+  margin: 0 0 18px;
+  padding: 10px 12px;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  border-radius: 8px;
+  background: rgba(248, 113, 113, 0.1);
+  color: #ffb3b3;
+  font-size: 0.88rem;
 }
 
 .auth-form {

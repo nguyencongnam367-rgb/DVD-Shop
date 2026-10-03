@@ -17,11 +17,13 @@
     </div>
 </header>
 
-<section class="table-panel" style="margin-top: 24px;">
+<section class="table-panel order-table-panel" style="margin-top: 24px;">
     <div class="panel-head">
         <span>Danh sách đơn hàng DVD</span>
-        <button style="border:none; background: var(--primary); color:white; border-radius: 10px; padding: 10px 14px; font-weight: 700; cursor: pointer;">+ Xuất báo cáo</button>
+        <button class="admin-action-button">+ Xuất báo cáo</button>
      </div>
+
+    {{#if orderNotice}}<p class="order-admin-notice" role="status">{{orderNotice}}</p>{{/if}}
 
     <table>
         <thead>
@@ -31,6 +33,7 @@
                 <th>Tổng tiền</th>
                 <th>Ngày đặt</th>
                 <th>Trạng thái</th>
+                <th>Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -51,10 +54,24 @@
                     <span class="pill yellow">Chờ xác nhận</span>
                     {{/if}}
                 </td>
+                <td>
+                    {{#if (eq this.status "Chờ xử lý")}}
+                    <div class="order-admin-actions">
+                        <form action="/admin/orders/{{this._id}}/approve" method="POST">
+                            <button class="order-admin-action order-admin-action--approve" type="submit">Đồng ý</button>
+                        </form>
+                        <form action="/admin/orders/{{this._id}}/reject" method="POST" onsubmit="return confirm('Bạn có chắc muốn từ chối đơn hàng này?');">
+                            <button class="order-admin-action order-admin-action--reject" type="submit">Từ chối</button>
+                        </form>
+                    </div>
+                    {{else}}
+                    <span class="order-admin-processed">Đã xử lý</span>
+                    {{/if}}
+                </td>
             </tr>
             {{else}}
             <tr>
-                <td colspan="5" style="text-align:center; color: var(--muted);">Chưa có đơn hàng nào.</td>
+                <td colspan="6" style="text-align:center; color: var(--muted);">Chưa có đơn hàng nào.</td>
             </tr>
             {{/each}}
         </tbody>

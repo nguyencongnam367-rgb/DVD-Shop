@@ -17,6 +17,7 @@ const productSchema = new mongoose.Schema(
   gallery: [String],
     description: { type: String, default: "" },
     soldCount: { type: Number, default: 0, min: 0 },
+    viewCount: { type: Number, default: 0, min: 0 },
     isFeatured: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
   },

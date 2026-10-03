@@ -20,6 +20,7 @@
 
       <div class="site-nav__actions">
         {{#if currentUser}}
+          <a href="/cart/orders" class="site-nav__link">Lịch sử mua hàng</a>
           <span class="user-chip"><i class="fa-regular fa-user"></i> {{currentUser.username}}</span>
           <a href="/auth/logout" class="btn-solid">Đăng xuất</a>
         {{else}}

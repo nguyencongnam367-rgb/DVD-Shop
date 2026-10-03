@@ -1,0 +1,220 @@
+button,
+.btn-orange,
+.btn-ghost,
+.btn-solid,
+.btn-add-cart,
+.auth-submit,
+.primary-btn,
+.ghost-btn,
+.icon-btn,
+.admin-form-button,
+.admin-table-action,
+.admin-action-button,
+.cta-btn,
+.small-btn,
+.hero-control,
+.qty-control button,
+.promo-card button,
+.banner button {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.06)
+  );
+  -webkit-backdrop-filter: blur(0.75rem) saturate(140%);
+  backdrop-filter: blur(0.75rem) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0.4rem 1rem rgba(0, 0, 0, 0.18);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.btn-orange,
+.btn-solid,
+.btn-add-cart,
+.auth-submit,
+.primary-btn,
+.admin-form-button:not(.admin-form-button--secondary),
+.admin-action-button {
+  border-color: rgba(232, 199, 102, 0.58);
+  background: linear-gradient(
+    135deg,
+    rgba(232, 199, 102, 0.28),
+    rgba(201, 162, 39, 0.12)
+  );
+  color: #f4d987;
+}
+
+.btn-ghost,
+.ghost-btn,
+.admin-form-button--secondary {
+  border-color: rgba(232, 199, 102, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(232, 199, 102, 0.12),
+    rgba(255, 255, 255, 0.04)
+  );
+  color: #e8c766;
+}
+
+.admin-table-action {
+  border-color: rgba(232, 199, 102, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(232, 199, 102, 0.16),
+    rgba(255, 255, 255, 0.05)
+  );
+  color: #e8c766;
+}
+
+.admin-action-button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-table-action--delete {
+  border-color: rgba(248, 113, 113, 0.45);
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.2),
+    rgba(248, 113, 113, 0.08)
+  );
+}
+
+.admin-table-action--delete:hover {
+  border-color: rgba(248, 113, 113, 0.65);
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.28),
+    rgba(248, 113, 113, 0.12)
+  );
+  filter: brightness(1.12);
+}
+
+.small-btn {
+  border-color: rgba(238, 77, 45, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 143, 107, 0.14),
+    rgba(238, 77, 45, 0.05)
+  );
+  color: #c83f23;
+}
+
+.small-btn.primary,
+.cta-btn,
+.promo-card button {
+  border-color: rgba(238, 77, 45, 0.48);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 143, 107, 0.3),
+    rgba(238, 77, 45, 0.14)
+  );
+  color: #b93820;
+}
+
+:is(
+    button,
+    .btn-orange,
+    .btn-ghost,
+    .btn-solid,
+    .btn-add-cart,
+    .auth-submit,
+    .primary-btn,
+    .ghost-btn,
+    .icon-btn,
+    .admin-form-button,
+    .admin-table-action,
+    .admin-action-button,
+    .cta-btn,
+    .small-btn,
+    .hero-control,
+    .qty-control button,
+    .promo-card button,
+    .banner button
+  ):hover {
+  border-color: rgba(232, 199, 102, 0.75);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    0 0.6rem 1.25rem rgba(0, 0, 0, 0.24);
+  filter: brightness(1.12);
+}
+
+.btn-add-cart:hover,
+.auth-submit:hover,
+.primary-btn:hover,
+.btn-solid:hover,
+.btn-orange:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(241, 212, 127, 0.36),
+    rgba(201, 162, 39, 0.18)
+  );
+}
+
+.small-btn.primary:hover,
+.cta-btn:hover,
+.promo-card button:hover {
+  border-color: rgba(238, 77, 45, 0.65);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 143, 107, 0.4),
+    rgba(238, 77, 45, 0.2)
+  );
+}
+
+button:focus-visible,
+.btn-orange:focus-visible,
+.btn-ghost:focus-visible,
+.btn-solid:focus-visible,
+.btn-add-cart:focus-visible,
+.auth-submit:focus-visible,
+.primary-btn:focus-visible,
+.ghost-btn:focus-visible,
+.admin-form-button:focus-visible,
+.admin-table-action:focus-visible,
+.admin-action-button:focus-visible,
+.cta-btn:focus-visible,
+.small-btn:focus-visible,
+.hero-control:focus-visible {
+  outline: 2px solid #e8c766;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  .btn-orange,
+  .btn-ghost,
+  .btn-solid,
+  .btn-add-cart,
+  .auth-submit,
+  .primary-btn,
+  .ghost-btn,
+  .icon-btn,
+  .admin-form-button,
+  .admin-table-action,
+  .admin-action-button,
+  .cta-btn,
+  .small-btn,
+  .hero-control,
+  .qty-control button,
+  .promo-card button,
+  .banner button {
+    transition: none;
+  }
+}

@@ -1,0 +1,16 @@
+<main class="checkout-page">
+  <section class="checkout-shell order-success">
+    <div class="order-success__icon" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+    <p class="checkout-kicker">DVDShop</p>
+    <h1 class="cart-title">Đặt hàng thành công</h1>
+    <p class="order-success__message">Cảm ơn bạn đã mua hàng. Bạn sẽ thanh toán khi nhận được đơn hàng.</p>
+    <div class="order-success__details">
+      <div><span>Mã đơn hàng</span><strong>{{order.orderCode}}</strong></div>
+      <div><span>Người nhận</span><strong>{{order.receiverName}}</strong></div>
+      <div><span>Địa chỉ giao hàng</span><strong>{{order.shippingAddress}}</strong></div>
+      <div><span>Phương thức thanh toán</span><strong>Thanh toán khi nhận hàng (COD)</strong></div>
+      <div><span>Tổng thanh toán</span><strong>{{formatVND order.totalAmount}}</strong></div>
+    </div>
+    <a href="/products" class="btn-solid order-success__link">Tiếp tục mua sắm</a>
+  </section>
+</main>

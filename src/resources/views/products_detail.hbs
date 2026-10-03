@@ -1,28 +1,76 @@
 <main class="product-detail section-container">
   <a class="product-detail__back" href="/">&larr; Quay lại danh sách sản phẩm</a>
 
-  <section class="product-detail__content">
-    <div class="product-detail__image-wrap">
-      <img
-        class="product-detail__image"
-        src="{{product.image}}"
-        alt="{{product.name}}"
-      />
-    </div>
+  <section class="productDetail-content">
+    <form class="product-detail__form" action="/cart/add" method="POST">
+      <input type="hidden" name="productId" value="{{product._id}}" />
 
-    <div class="product-detail__info">
-      <p class="product-detail__eyebrow">DVD COLLECTION</p>
-      <h1 class="product-detail__title">{{product.name}}</h1>
-      <p class="product-detail__director">Đạo diễn: {{product.director}}</p>
-      <p class="product-detail__description">
-        {{product.description}}
-      </p>
-      <p class="product-detail__price">{{formatVND product.price}}</p>
+      <div class="product-detail__media">
+        <div class="product-detail__image-wrap">
+          <img class="product-detail__image" src="{{product.image}}" alt="{{product.name}}" />
+        </div>
+        {{#if product.gallery.length}}
+          <div class="product-detail__gallery" aria-label="Ảnh sản phẩm">
+            {{#each product.gallery}}
+              <img src="{{this}}" alt="{{../product.name}}" loading="lazy" />
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
 
-      <form action="/cart/add" method="POST">
-        <input type="hidden" name="productId" value="{{product._id}}" />
-        <button type="submit" class="btn-add-cart">Thêm Vào Giỏ Hàng</button>
-      </form>
-    </div>
+      <div class="product-detail__info">
+        <p class="product-detail__eyebrow">DVD COLLECTION</p>
+        <h1 class="product-detail__title">{{product.name}}</h1>
+        {{#if product.description}}
+          <p class="product-detail__description">{{product.description}}</p>
+        {{/if}}
+
+        <dl class="product-detail__facts">
+          {{#if product.director}}<div><dt>Đạo diễn</dt><dd>{{product.director}}</dd></div>{{/if}}
+          {{#if product.actors.length}}
+            <div>
+              <dt>Diễn viên</dt>
+              <dd>{{#each product.actors}}{{#unless @first}}, {{/unless}}{{this}}{{/each}}</dd>
+            </div>
+          {{/if}}
+          {{#if product.categoryId.name}}<div><dt>Thể loại</dt><dd>{{product.categoryId.name}}</dd></div>{{/if}}
+          {{#if product.releaseYear}}<div><dt>Năm phát hành</dt><dd>{{product.releaseYear}}</dd></div>{{/if}}
+          {{#if product.duration}}<div><dt>Thời lượng</dt><dd>{{product.duration}} phút</dd></div>{{/if}}
+          {{#if product.language}}<div><dt>Ngôn ngữ</dt><dd>{{product.language}}</dd></div>{{/if}}
+          {{#if (gt product.stock -1)}}
+            <div>
+              <dt>Tình trạng</dt>
+              <dd>{{#if product.stock}}Còn {{product.stock}} sản phẩm{{else}}Hết hàng{{/if}}</dd>
+            </div>
+          {{/if}}
+          {{#if product.viewCount}}<div><dt>Lượt xem</dt><dd>{{product.viewCount}}</dd></div>{{/if}}
+        </dl>
+
+        <div class="product-detail__purchase">
+          <p class="product-detail__price">
+            {{#if product.discountPrice}}
+              <span class="product-detail__sale-price">{{formatVND product.discountPrice}}</span>
+              <s>{{formatVND product.price}}</s>
+            {{else}}
+              <span class="product-detail__sale-price">{{formatVND product.price}}</span>
+            {{/if}}
+          </p>
+
+          <label class="product-detail__quantity">
+            <span>Số lượng</span>
+            <span class="product-detail__stepper">
+              <button type="button" data-quantity-step="-1" aria-label="Giảm số lượng">−</button>
+              <input type="number" name="quantity" value="1" min="1" step="1" inputmode="numeric" />
+              <button type="button" data-quantity-step="1" aria-label="Tăng số lượng">+</button>
+            </span>
+          </label>
+          <button type="submit" class="btn-add-cart">
+            <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            Thêm vào giỏ hàng
+          </button>
+        </div>
+      </div>
+    </form>
   </section>
 </main>
+<script src="/js/product-quantity.js" defer></script>

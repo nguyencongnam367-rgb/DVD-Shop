@@ -1,6 +1,8 @@
 /* Load AFTER dashboard.css: recolors the admin panel to the classic gold theme */
 :root { --primary: #c9a227; --primary-dark: #8a6a18; }
-.brand-mark { background: linear-gradient(135deg, #e8c766, #c9a227); color: #1a1207; box-shadow: 0 12px 24px rgba(201,162,39,.2); }
+.brand-mark { width: 52px; height: 52px; flex: 0 0 52px; border-radius: 16px; background: linear-gradient(135deg, #e8c766, #c9a227); color: #1a1207; box-shadow: 0 12px 24px rgba(201,162,39,.2); font-size: 1.15rem; }
+.brand-text { font-size: 1.15rem; }
+.brand-text small { margin-top: 0.1rem; color: #c7c7c7; font-size: 0.78rem; letter-spacing: 0.02em; }
 .nav-item.active { background: rgba(201,162,39,.12); border-color: rgba(201,162,39,.2); }
 .support-box { background: linear-gradient(135deg, rgba(201,162,39,.14), rgba(255,255,255,.02)); border-color: rgba(201,162,39,.26); }
 .banner { background: linear-gradient(135deg, #8a6a18, #c9a227 60%, #5c4a17); box-shadow: 0 18px 35px rgba(201,162,39,.25); color:#1a1207; }

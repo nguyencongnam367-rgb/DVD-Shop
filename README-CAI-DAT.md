@@ -7,7 +7,7 @@
 5. `npm run dev` → http://localhost:3000
 
 Lưu ý:
-- Cần xoá file `src/app/data/products.js` (không còn dùng).
+- File dữ liệu mẫu `src/app/data/products.js` đã được loại bỏ vì không còn dùng.
 - Trang chủ link chi tiết theo slug (`/home/:slug`), trang /products link theo `_id`.
 - Icon Morphicons: dán SVG export từ morphicons.com vào `<span class="morph-icon">` trong home.hbs (hiện là icon giỏ hàng mẫu).
 - Đổi mật khẩu admin sau khi seed.

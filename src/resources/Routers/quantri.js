@@ -18,12 +18,16 @@ router.use((req, res, next) => {
 });
 
 router.get("/dashboard", quantriController.dashboard);
+router.get("/reports", quantriController.reports);
 router.get("/users", quantriController.users);
 router.get("/products", quantriController.products);
 router.get("/products/add", quantriController.addProduct);
 router.post("/products", quantriController.createProduct);
+router.post("/products/:id/delete", quantriController.deleteProduct);
 router.get("/products/:id/upgrade", quantriController.upgradeProduct);
 router.post("/products/:id/upgrade", quantriController.updateProduct);
 router.get("/orders", quantriController.orders);
+router.post("/orders/:id/approve", quantriController.approveOrder);
+router.post("/orders/:id/reject", quantriController.rejectOrder);
 
 module.exports = router;

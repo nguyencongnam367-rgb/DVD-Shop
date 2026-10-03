@@ -64,10 +64,10 @@ body {
   flex-wrap: wrap;
 }
 
-.product-detail__content {
+.product-detail__form {
   width: 100%;
   padding: clamp(1rem, 3vw, 1.75rem);
-  gap: clamp(1.25rem, 4vw, 3.25rem);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
 }
 .product-detail__title {
   font-size: clamp(1.6rem, 1rem + 3vw, 3.25rem);
@@ -79,9 +79,6 @@ body {
 
 @media (max-width: 62rem) {
   .cart-layout {
-    grid-template-columns: 1fr;
-  }
-  .product-detail__content {
     grid-template-columns: 1fr;
   }
   .product-detail__image-wrap {

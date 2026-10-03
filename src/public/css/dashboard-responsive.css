@@ -1,6 +1,7 @@
 .content { padding: clamp(0.75rem, 3vw, 1.75rem); min-width: 0; }
 .table-panel { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .table-panel table { min-width: 34rem; }
+.order-table-panel table { min-width: 48rem; }
 .topbar { flex-wrap: wrap; gap: 0.75rem; }
 .search { min-width: 0; }
 @media (max-width: 62rem) {

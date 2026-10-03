@@ -17,7 +17,15 @@
 <section class="stats-grid">
   <div class="stat-card"><div class="stat-top"><h3>Đơn hàng</h3><div class="icon-box blue"><i class="fa-solid fa-box-open"></i></div></div><div class="value">{{totalOrders}}</div></div>
   <div class="stat-card"><div class="stat-top"><h3>Khách hàng</h3><div class="icon-box green"><i class="fa-solid fa-user-group"></i></div></div><div class="value">{{totalUsers}}</div></div>
+  <div class="stat-card"><div class="stat-top"><h3>Doanh thu (không gồm đơn hủy)</h3><div class="icon-box orange"><i class="fa-solid fa-sack-dollar"></i></div></div><div class="value">{{formatVND totalRevenue}}</div></div>
+  <div class="stat-card"><div class="stat-top"><h3>Tổng số lượng sản phẩm trong kho</h3><div class="icon-box green"><i class="fa-solid fa-boxes-stacked"></i></div></div><div class="value">{{totalProductQuantity}}</div></div>
 </section>
+
+<a class="dashboard-report-link" href="/admin/reports">
+  <span class="dashboard-report-link__icon"><i class="fa-solid fa-chart-column"></i></span>
+  <span><strong>Mở trang báo cáo</strong><small>Xem thống kê doanh thu, tồn kho và doanh thu theo tháng</small></span>
+  <i class="fa-solid fa-arrow-right dashboard-report-link__arrow"></i>
+</a>
 
 <section class="table-panel">
   <div class="panel-head"><span>DVD bán chạy</span><a href="/admin/products" style="color: var(--primary); font-size: 0.82rem;">Quản lý</a></div>
@@ -26,7 +34,16 @@
     <tbody>
       {{#each topProducts}}
       <tr>
-        <td><div class="product"><div class="thumb">{{initial this.name}}</div><strong>{{this.name}}</strong></div></td>
+        <td>
+          <div class="product">
+            {{#if this.image}}
+            <img class="thumb thumb-image" src="{{this.image}}" alt="Ảnh {{this.name}}" loading="lazy">
+            {{else}}
+            <div class="thumb">{{initial this.name}}</div>
+            {{/if}}
+            <strong>{{this.name}}</strong>
+          </div>
+        </td>
         <td>{{formatVND this.price}}</td><td>{{this.soldCount}}</td><td>{{this.stock}}</td>
       </tr>
       {{else}}

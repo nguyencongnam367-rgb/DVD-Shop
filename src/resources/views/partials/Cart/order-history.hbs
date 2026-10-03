@@ -1,0 +1,68 @@
+<main class="checkout-page">
+  <section class="checkout-shell order-history">
+    <div class="cart-header">
+      <div>
+        <p class="checkout-kicker">Tài khoản của bạn</p>
+        <h1 class="cart-title">Lịch sử mua hàng</h1>
+        <p class="order-history__count">{{orderCount}} đơn hàng</p>
+      </div>
+      <a href="/products" class="ghost-btn checkout-back">Tiếp tục mua sắm</a>
+    </div>
+
+    {{#if orders.length}}
+      <div class="order-history__list">
+        {{#each orders}}
+          <article class="order-history__card">
+            <div class="order-history__heading">
+              <div>
+                <span class="order-history__label">Mã đơn hàng</span>
+                <h2>#{{this.orderCode}}</h2>
+              </div>
+              <span class="order-status order-status--{{this.statusClass}}">{{this.statusLabel}}</span>
+            </div>
+
+            <div class="order-history__meta">
+              <div>
+                <span>Ngày đặt</span>
+                <strong>{{formatDate this.createdAt}}</strong>
+              </div>
+              <div>
+                <span>Sản phẩm</span>
+                <strong>{{this.itemCount}} sản phẩm</strong>
+              </div>
+              <div>
+                <span>Thanh toán</span>
+                <strong>{{this.paymentLabel}}</strong>
+              </div>
+              <div>
+                <span>Người nhận</span>
+                <strong>{{this.receiverName}}</strong>
+              </div>
+            </div>
+
+            <div class="order-history__products">
+              {{#each this.items}}
+                <div class="order-history__product">
+                  <span>{{this.name}} <small>× {{this.quantity}}</small></span>
+                  <strong>{{formatVND this.subTotal}}</strong>
+                </div>
+              {{/each}}
+            </div>
+
+            <div class="order-history__total">
+              <span>Tổng thanh toán</span>
+              <strong>{{formatVND this.totalAmount}}</strong>
+            </div>
+          </article>
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="order-history__empty">
+        <span class="order-history__empty-icon" aria-hidden="true"><i class="fa-solid fa-receipt"></i></span>
+        <h2>Bạn chưa có đơn hàng nào</h2>
+        <p>Các đơn hàng bạn đặt sẽ xuất hiện tại đây.</p>
+        <a href="/products" class="btn-solid">Khám phá sản phẩm</a>
+      </div>
+    {{/if}}
+  </section>
+</main>

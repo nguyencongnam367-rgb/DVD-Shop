@@ -1,0 +1,17 @@
+body {
+  font-variant-numeric: tabular-nums;
+}
+
+.movie-price,
+.movie-price__original,
+.product-detail__price,
+.price-tag,
+.summary-row strong,
+.summary-row.total > span:last-child,
+.price,
+.stat-card .value,
+.report-stats .value,
+.report-chart__value {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-variant-numeric: tabular-nums;
+}

@@ -52,7 +52,13 @@ class ProductController {
 
   async show(req, res) {
     try {
-      const product = await Product.findById(req.params.id).lean();
+      const product = await Product.findOneAndUpdate(
+        { _id: req.params.id, isActive: { $ne: false } },
+        { $inc: { viewCount: 1 } },
+        { new: true },
+      )
+        .populate("categoryId")
+        .lean();
       if (!product) return res.status(404).send("Không tìm thấy sản phẩm");
       return res.render("products_detail", { product, layout: "main" });
     } catch (error) {

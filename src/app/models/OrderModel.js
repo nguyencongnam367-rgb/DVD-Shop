@@ -20,6 +20,7 @@ const orderSchema = new mongoose.Schema(
     shippingAddress: { type: String, required: true, trim: true },
     paymentMethod: { type: String, enum: ["COD", "Chuyển khoản"], default: "COD" },
     totalAmount: { type: Number, required: true, min: 0 },
+    inventoryReserved: { type: Boolean, default: false },
     status: { type: String, enum: ["Chờ xử lý", "Đang giao", "Hoàn thành", "Đã huỷ"], default: "Chờ xử lý" },
     items: { type: [orderItemSchema], required: true, validate: (items) => items.length > 0 },
   },

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Product = require("../models/ProductModel");
+const Cart = require("../models/CartModel");
 const User = require("../models/UserModel");
 const Order = require("../models/OrderModel");
 const Category = require("../models/CategoryModel");
@@ -97,20 +98,128 @@ async function renderProductForm(
     });
 }
 
+async function getReportStats() {
+  const now = new Date();
+  const monthStarts = Array.from({ length: 6 }, (_, index) =>
+    new Date(now.getFullYear(), now.getMonth() - 5 + index, 1),
+  );
+  const firstMonth = monthStarts[0];
+  const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const [revenueOrders, inventory, productTypes, orderCount, monthlyTotals] =
+    await Promise.all([
+      Order.aggregate([
+        { $match: { status: { $ne: "Đã huỷ" } } },
+        {
+          $group: {
+            _id: null,
+            total: {
+              $sum: {
+                $convert: {
+                  input: "$totalAmount",
+                  to: "double",
+                  onError: 0,
+                  onNull: 0,
+                },
+              },
+            },
+          },
+        },
+      ]),
+      Product.aggregate([
+        {
+          $group: {
+            _id: null,
+            total: {
+              $sum: {
+                $convert: {
+                  input: "$stock",
+                  to: "int",
+                  onError: 0,
+                  onNull: 0,
+                },
+              },
+            },
+          },
+        },
+      ]),
+      Product.countDocuments(),
+      Order.countDocuments({ status: { $ne: "Đã huỷ" } }),
+      Order.aggregate([
+        {
+          $match: {
+            status: { $ne: "Đã huỷ" },
+            createdAt: { $gte: firstMonth, $lt: nextMonth },
+          },
+        },
+        {
+          $group: {
+            _id: {
+              year: { $year: "$createdAt" },
+              month: { $month: "$createdAt" },
+            },
+            total: {
+              $sum: {
+                $convert: {
+                  input: "$totalAmount",
+                  to: "double",
+                  onError: 0,
+                  onNull: 0,
+                },
+              },
+            },
+          },
+        },
+      ]),
+    ]);
+
+  const totalsByMonth = new Map(
+    monthlyTotals.map(({ _id, total }) => [
+      `${_id.year}-${_id.month}`,
+      total,
+    ]),
+  );
+  const monthlyRevenue = monthStarts.map((start) => ({
+    label: new Intl.DateTimeFormat("vi-VN", { month: "short" }).format(start),
+    total:
+      totalsByMonth.get(`${start.getFullYear()}-${start.getMonth() + 1}`) || 0,
+  }));
+  const maxMonthlyRevenue = Math.max(
+    0,
+    ...monthlyRevenue.map((month) => month.total),
+  );
+
+  return {
+    totalRevenue: revenueOrders[0] ? revenueOrders[0].total : 0,
+    totalProductQuantity: inventory[0] ? inventory[0].total : 0,
+    totalProductTypes: productTypes,
+    totalReportOrders: orderCount,
+    monthlyRevenue: monthlyRevenue.map((month) => ({
+      ...month,
+      barHeight:
+        maxMonthlyRevenue > 0
+          ? Math.max(4, Math.round((month.total / maxMonthlyRevenue) * 100))
+          : 4,
+    })),
+  };
+}
+
 class QuanTriController {
   async dashboard(req, res) {
     try {
-      const [topProducts, totalOrders, totalUsers] = await Promise.all([
-        Product.find().sort({ soldCount: -1 }).limit(5).lean(),
-        Order.countDocuments(),
-        User.countDocuments(),
-      ]);
+      const [topProducts, totalOrders, totalUsers, reportStats] =
+        await Promise.all([
+          Product.find().sort({ soldCount: -1 }).limit(5).lean(),
+          Order.countDocuments(),
+          User.countDocuments(),
+          getReportStats(),
+        ]);
 
       return res.render("partials/QuanTri/home", {
         layout: "DashBoard",
         topProducts,
         totalOrders,
         totalUsers,
+        ...reportStats,
       });
     } catch (error) {
       console.error("Không thể tải dashboard:", error.message);
@@ -238,6 +347,27 @@ class QuanTriController {
     }
   }
 
+  async deleteProduct(req, res) {
+    try {
+      if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(404).send("Không tìm thấy sản phẩm");
+      }
+
+      const product = await Product.findByIdAndDelete(req.params.id).lean();
+      if (!product) return res.status(404).send("Không tìm thấy sản phẩm");
+
+      await Cart.updateMany(
+        { "items.productId": product._id },
+        { $pull: { items: { productId: product._id } } },
+      );
+
+      return res.redirect("/admin/products");
+    } catch (error) {
+      console.error("Không thể xóa sản phẩm:", error.message);
+      return res.status(500).send("Không thể xóa sản phẩm");
+    }
+  }
+
   async orders(req, res) {
     try {
       const orders = await Order.find()
@@ -247,10 +377,111 @@ class QuanTriController {
       return res.render("partials/QuanTri/orders", {
         layout: "DashBoard",
         orders,
+        orderNotice:
+          req.query.result === "approved"
+            ? "Đã xác nhận đơn hàng và chuyển sang trạng thái đang giao."
+            : req.query.result === "rejected"
+              ? "Đã từ chối đơn hàng và hoàn lại tồn kho."
+              : req.query.result === "updated"
+                ? "Trạng thái đơn hàng đã được cập nhật."
+                : req.query.result === "already-processed"
+                  ? "Đơn hàng đã được xử lý trước đó."
+                  : "",
       });
     } catch (error) {
       console.error("Không thể tải danh sách đơn hàng:", error.message);
       return res.status(500).send("Không thể tải danh sách đơn hàng");
+    }
+  }
+
+  async approveOrder(req, res) {
+    try {
+      if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(404).send("Không tìm thấy đơn hàng");
+      }
+
+      const order = await Order.findOneAndUpdate(
+        { _id: req.params.id, status: "Chờ xử lý" },
+        { $set: { status: "Đang giao" } },
+        { returnDocument: "after" },
+      );
+      if (!order) {
+        return res.redirect("/admin/orders?result=already-processed");
+      }
+
+      return res.redirect("/admin/orders?result=approved");
+    } catch (error) {
+      console.error("Không thể xác nhận đơn hàng:", error.message);
+      return res.status(500).send("Không thể xác nhận đơn hàng");
+    }
+  }
+
+  async rejectOrder(req, res) {
+    try {
+      if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(404).send("Không tìm thấy đơn hàng");
+      }
+
+      const order = await Order.findOneAndUpdate(
+        { _id: req.params.id, status: "Chờ xử lý" },
+        { $set: { status: "Đã huỷ" } },
+        { returnDocument: "after" },
+      );
+      if (!order) {
+        return res.redirect("/admin/orders?result=already-processed");
+      }
+
+      if (order.inventoryReserved) {
+        try {
+          for (const item of order.items) {
+            const restored = await Product.updateOne(
+              { _id: item.productId },
+              {
+                $inc: {
+                  stock: item.quantity,
+                  soldCount: -item.quantity,
+                },
+              },
+            );
+            if (restored.matchedCount === 0) {
+              console.warn(
+                `Không thể hoàn kho cho sản phẩm đã bị xóa: ${item.productId} (đơn ${order.orderCode})`,
+              );
+            }
+          }
+          await Order.updateOne(
+            { _id: order._id, status: "Đã huỷ" },
+            { $set: { inventoryReserved: false } },
+          );
+        } catch (inventoryError) {
+          console.error(
+            `Đơn ${order.orderCode} đã bị từ chối nhưng chưa hoàn kho đầy đủ:`,
+            inventoryError.message,
+          );
+          return res
+            .status(500)
+            .send("Đơn hàng đã bị từ chối nhưng không thể hoàn kho đầy đủ. Vui lòng kiểm tra tồn kho.");
+        }
+      }
+
+      return res.redirect("/admin/orders?result=rejected");
+    } catch (error) {
+      console.error("Không thể từ chối đơn hàng:", error.message);
+      return res.status(500).send("Không thể từ chối đơn hàng");
+    }
+  }
+
+  async reports(req, res) {
+    try {
+      const reportStats = await getReportStats();
+      return res.render("partials/QuanTri/reports", {
+        layout: "DashBoard",
+        adminReportPage: true,
+        ...reportStats,
+      });
+    } catch (error) {
+      console.error("Không thể tải báo cáo:", error.message);
+      return res.status(500).send("Không thể tải báo cáo");
     }
   }
 }
