@@ -78,6 +78,10 @@ app.use((err, req, res, next) => {
   const status = err.status || 500;
   console.error(err.stack || err.message);
 
+  if (req.get("X-Requested-With") === "XMLHttpRequest") {
+    return res.status(status).json({ message: err.message || "Có lỗi xảy ra trên hệ thống." });
+  }
+
   res.status(status).send(`
     <html>
       <head>

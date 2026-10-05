@@ -386,7 +386,7 @@ class CartController {
         const userId = req.session && req.session.userId;
         if (!userId) return res.redirect("/auth/login");
 
-        const orders = await Order.find({ userId })
+        const orders = await Order.find({ userId, status: { $ne: "Đã huỷ" } })
           .sort({ createdAt: -1 })
           .lean();
         const history = orders.map((order) => ({
@@ -421,6 +421,83 @@ class CartController {
       } catch (error) {
         console.error("Không thể tải lịch sử mua hàng:", error.message);
         return res.status(500).send("Không thể tải lịch sử mua hàng");
+      }
+    }
+
+    async cancelOrder(req, res) {
+      try {
+        const userId = req.session && req.session.userId;
+        const wantsJson = req.get("X-Requested-With") === "XMLHttpRequest";
+        if (!userId) {
+          if (wantsJson) {
+            return res.status(401).json({ message: "Vui lòng đăng nhập lại." });
+          }
+          return res.redirect("/auth/login");
+        }
+
+        let order = await Order.findOneAndUpdate(
+          {
+            orderCode: req.params.orderCode,
+            userId,
+            status: { $ne: "Đã huỷ" },
+          },
+          { $set: { status: "Đã huỷ" } },
+          { returnDocument: "after" },
+        );
+        if (!order) {
+          order = await Order.findOne({
+            orderCode: req.params.orderCode,
+            userId,
+          });
+          if (!order || order.status !== "Đã huỷ") {
+            if (wantsJson) {
+              return res.status(404).json({ message: "Không tìm thấy đơn hàng." });
+            }
+            return res.status(404).send("Không tìm thấy đơn hàng");
+          }
+        }
+
+        if (order.inventoryReserved) {
+          for (const item of order.items) {
+            const restored = await Product.updateOne(
+              { _id: item.productId },
+              {
+                $inc: {
+                  stock: item.quantity,
+                  soldCount: -item.quantity,
+                },
+              },
+            );
+            if (restored.matchedCount === 0) {
+              console.warn(
+                `Không thể hoàn kho cho sản phẩm đã bị xóa: ${item.productId} (đơn ${order.orderCode})`,
+              );
+            }
+          }
+          const reservationUpdated = await Order.updateOne(
+            { _id: order._id, status: "Đã huỷ" },
+            { $set: { inventoryReserved: false } },
+          );
+          if (reservationUpdated.matchedCount !== 1) {
+            throw new Error(`Không thể cập nhật tồn kho đơn ${order.orderCode}.`);
+          }
+        }
+
+        const deletedOrder = await Order.deleteOne({ _id: order._id, userId });
+        if (deletedOrder.deletedCount !== 1) {
+          throw new Error(`Không thể xóa đơn hàng ${order.orderCode}.`);
+        }
+
+        if (wantsJson) {
+          return res.json({ success: true });
+        }
+        return res.redirect("/cart/orders?result=cancelled");
+      } catch (error) {
+        console.error("Không thể hủy đơn hàng:", error.message);
+        if (req.get("X-Requested-With") === "XMLHttpRequest") {
+          return res.status(500).json({ message: "Không thể hủy đơn hàng" });
+        }
+        return res.status(500).send("Không thể hủy đơn hàng");
       }
     }
   }

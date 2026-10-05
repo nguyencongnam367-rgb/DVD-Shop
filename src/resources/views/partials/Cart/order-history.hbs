@@ -4,7 +4,7 @@
       <div>
         <p class="checkout-kicker">Tài khoản của bạn</p>
         <h1 class="cart-title">Lịch sử mua hàng</h1>
-        <p class="order-history__count">{{orderCount}} đơn hàng</p>
+        <p class="order-history__count" data-order-count="{{orderCount}}">{{orderCount}} đơn hàng</p>
       </div>
       <a href="/products" class="ghost-btn checkout-back">Tiếp tục mua sắm</a>
     </div>
@@ -53,6 +53,14 @@
               <span>Tổng thanh toán</span>
               <strong>{{formatVND this.totalAmount}}</strong>
             </div>
+
+            <form
+              class="order-history__actions"
+              action="/cart/orders/{{this.orderCode}}/cancel"
+              method="post"
+            >
+              <button class="order-history__cancel" type="submit">Hủy đơn hàng</button>
+            </form>
           </article>
         {{/each}}
       </div>
@@ -66,3 +74,66 @@
     {{/if}}
   </section>
 </main>
+
+<script>
+  document.querySelectorAll(".order-history__actions").forEach((form) => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!window.confirm("Bạn có chắc muốn hủy đơn hàng này không?")) return;
+
+      const button = form.querySelector("button[type='submit']");
+      const card = form.closest(".order-history__card");
+      const count = document.querySelector("[data-order-count]");
+      const list = document.querySelector(".order-history__list");
+      const section = document.querySelector(".order-history");
+      button.disabled = true;
+      button.textContent = "Đang hủy...";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        });
+        const redirectedToLogin =
+          response.redirected && new URL(response.url).pathname.startsWith("/auth/login");
+        const contentType = response.headers.get("content-type") || "";
+        if (!response.ok || redirectedToLogin) {
+          throw new Error("Yêu cầu hủy đơn không được máy chủ xác nhận.");
+        }
+
+        if (contentType.includes("application/json")) {
+          const result = await response.json();
+          if (!result.success) throw new Error("Yêu cầu hủy đơn không được máy chủ xác nhận.");
+        } else if (
+          !response.redirected ||
+          new URL(response.url).pathname !== "/cart/orders"
+        ) {
+          throw new Error("Yêu cầu hủy đơn không được máy chủ xác nhận.");
+        }
+
+        card.remove();
+        const remainingOrders = Math.max(0, Number(count.dataset.orderCount) - 1);
+        count.dataset.orderCount = remainingOrders;
+        count.textContent = `${remainingOrders} đơn hàng`;
+
+        if (remainingOrders === 0) {
+          list.remove();
+          const empty = document.createElement("div");
+          empty.className = "order-history__empty";
+          empty.innerHTML = `
+            <span class="order-history__empty-icon" aria-hidden="true"><i class="fa-solid fa-receipt"></i></span>
+            <h2>Bạn chưa có đơn hàng nào</h2>
+            <p>Các đơn hàng bạn đặt sẽ xuất hiện tại đây.</p>
+            <a href="/products" class="btn-solid">Khám phá sản phẩm</a>
+          `;
+          section.append(empty);
+        }
+      } catch (error) {
+        console.error("Không thể gửi yêu cầu hủy đơn hàng:", error);
+        button.disabled = false;
+        button.textContent = "Hủy đơn hàng";
+      }
+    });
+  });
+</script>

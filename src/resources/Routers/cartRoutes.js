@@ -7,6 +7,7 @@ router.post("/add", cartController.add);
 router.get("/checkout", cartController.checkout);
 router.post("/checkout", cartController.placeOrder);
 router.get("/orders", cartController.orderHistory);
+router.post("/orders/:orderCode/cancel", cartController.cancelOrder);
 router.get("/orders/:orderCode", cartController.orderSuccess);
 
 module.exports = router;
