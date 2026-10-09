@@ -7,10 +7,10 @@ class HomeController {
         .find({ isActive: { $ne: false } })
         .sort({ viewCount: -1, soldCount: -1 })
         .lean();
-      return res.render("home", {
+      return res.render("layouts/home", {
         products,
         popularProducts: products.slice(0, 5),
-        layout: "main",
+        layout: "user/main",
       });
     } catch (error) {
       console.error("Không thể tải sản phẩm trang chủ:", error.message);

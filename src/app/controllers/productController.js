@@ -28,7 +28,7 @@ class ProductController {
 
       const cats = categories.map((c) => ({ ...c, active: String(c._id) === cat }));
 
-      return res.render("products", {
+      return res.render("partials/Product-form/products", {
         products,
         categories: cats,
         total: products.length,
@@ -42,7 +42,7 @@ class ProductController {
           { value: "name", label: "Tên A → Z", selected: sort === "name" },
         ],
         allActive: !cat,
-        layout: "main",
+        layout: "user/main",
       });
     } catch (error) {
       console.error("Không thể tải danh sách sản phẩm:", error.message);
@@ -60,7 +60,10 @@ class ProductController {
         .populate("categoryId")
         .lean();
       if (!product) return res.status(404).send("Không tìm thấy sản phẩm");
-      return res.render("products_detail", { product, layout: "main" });
+      return res.render("partials/Product-form/products_detail", {
+        product,
+        layout: "user/main",
+      });
     } catch (error) {
       console.error("Không thể tải chi tiết sản phẩm:", error.message);
       return res.status(500).send("Không thể tải dữ liệu sản phẩm");

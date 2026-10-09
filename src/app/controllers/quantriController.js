@@ -86,8 +86,8 @@ async function renderProductForm(
 
   return res
     .status(status)
-    .render(`partials/QuanTri/CRUID/${isUpgrade ? "upgrade" : "add"}`, {
-      layout: "DashBoard",
+    .render(`partials/QuanTri/crud/${isUpgrade ? "upgrade" : "add"}`, {
+      layout: "admin/DashBoard",
       product: formProduct,
       categories: categories.map((category) => ({
         ...category,
@@ -215,7 +215,7 @@ class QuanTriController {
         ]);
 
       return res.render("partials/QuanTri/home", {
-        layout: "DashBoard",
+        layout: "admin/DashBoard",
         topProducts,
         totalOrders,
         totalUsers,
@@ -231,7 +231,7 @@ class QuanTriController {
     try {
       const users = await User.find().lean();
       return res.render("partials/QuanTri/users", {
-        layout: "DashBoard",
+        layout: "admin/DashBoard",
         users,
       });
     } catch (error) {
@@ -243,8 +243,8 @@ class QuanTriController {
   async products(req, res) {
     try {
       const products = await Product.find().populate("categoryId").lean();
-      return res.render("partials/QuanTri/CRUID/products", {
-        layout: "DashBoard",
+      return res.render("partials/QuanTri/crud/products", {
+        layout: "admin/DashBoard",
         products,
       });
     } catch (error) {
@@ -375,7 +375,7 @@ class QuanTriController {
         .sort({ createdAt: -1 })
         .lean();
       return res.render("partials/QuanTri/orders", {
-        layout: "DashBoard",
+        layout: "admin/DashBoard",
         orders,
         orderNotice:
           req.query.result === "approved"
@@ -475,7 +475,7 @@ class QuanTriController {
     try {
       const reportStats = await getReportStats();
       return res.render("partials/QuanTri/reports", {
-        layout: "DashBoard",
+        layout: "admin/DashBoard",
         adminReportPage: true,
         ...reportStats,
       });

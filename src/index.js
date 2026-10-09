@@ -47,7 +47,7 @@ app.engine(
   "hbs",
   engine({
     extname: ".hbs",
-    defaultLayout: "main",
+    defaultLayout: "user/main",
     helpers: {
       formatVND: (value) => formatVND(value),
       initial,

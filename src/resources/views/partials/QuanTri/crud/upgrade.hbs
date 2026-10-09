@@ -1,8 +1,9 @@
-<div class="admin-product-page admin-product-add">
+<div class="admin-product-page admin-product-upgrade">
   <header class="topbar admin-product-heading">
     <div>
-      <p class="admin-product-kicker">Kho phim</p>
-      <h1>Thêm sản phẩm</h1>
+      <p class="admin-product-kicker">Kho phim / Chỉnh sửa</p>
+      <h1>Sửa sản phẩm</h1>
+      <p class="admin-product-identity">/{{product.slug}}</p>
     </div>
     <a class="admin-form-button admin-form-button--secondary" href="/admin/products">
       <i class="fa-solid fa-arrow-left"></i> Danh sách DVD
@@ -10,11 +11,11 @@
   </header>
 
   <section class="table-panel">
-    <form class="admin-product-form" method="POST" action="/admin/products">
-      {{> QuanTri/CRUID/product-fields}}
+    <form class="admin-product-form" method="POST" action="/admin/products/{{product._id}}/upgrade">
+      {{> QuanTri/crud/product-fields}}
       <div class="admin-form-actions">
         <button class="admin-form-button admin-form-submit" type="submit">
-          <i class="fa-solid fa-plus"></i> Tạo sản phẩm
+          <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi
         </button>
         <a class="admin-form-button admin-form-button--secondary" href="/admin/products">Hủy</a>
       </div>

@@ -3,7 +3,7 @@ const User = require("../models/UserModel");
 
 class AuthController {
   showLogin(req, res) {
-    res.render("login", { layout: "main" });
+    res.render("layouts/login", { layout: "user/main" });
   }
 
   async login(req, res) {
@@ -14,8 +14,8 @@ class AuthController {
         typeof req.body.password === "string" ? req.body.password : "";
 
       if (!identifier || !password) {
-        return res.status(401).render("login", {
-          layout: "main",
+        return res.status(401).render("layouts/login", {
+          layout: "user/main",
           error: "Vui lòng nhập tên đăng nhập và mật khẩu.",
           username: identifier,
         });
@@ -32,8 +32,8 @@ class AuthController {
         user.isActive === false ||
         !(await bcrypt.compare(password, user.password))
       ) {
-        return res.status(401).render("login", {
-          layout: "main",
+        return res.status(401).render("layouts/login", {
+          layout: "user/main",
           error: "Tên đăng nhập hoặc mật khẩu không chính xác.",
           username: identifier,
         });
@@ -56,7 +56,7 @@ class AuthController {
   }
 
   showRegister(req, res) {
-    res.render("register", { layout: "main" });
+    res.render("layouts/register", { layout: "user/main" });
   }
 
   async register(req, res) {
