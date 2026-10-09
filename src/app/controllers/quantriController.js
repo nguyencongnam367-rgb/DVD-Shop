@@ -86,7 +86,7 @@ async function renderProductForm(
 
   return res
     .status(status)
-    .render(`partials/QuanTri/${isUpgrade ? "upgrade" : "add"}`, {
+    .render(`partials/QuanTri/CRUID/${isUpgrade ? "upgrade" : "add"}`, {
       layout: "DashBoard",
       product: formProduct,
       categories: categories.map((category) => ({
@@ -243,7 +243,7 @@ class QuanTriController {
   async products(req, res) {
     try {
       const products = await Product.find().populate("categoryId").lean();
-      return res.render("partials/QuanTri/products", {
+      return res.render("partials/QuanTri/CRUID/products", {
         layout: "DashBoard",
         products,
       });
