@@ -1,8 +1,8 @@
 <header class="topbar">
-    <div class="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Tìm kiếm DVD..."></input>
-    </div>
+    <form class="search" method="GET" action="/admin/products">
+        <input type="search" name="q" value="{{q}}" placeholder="Tìm kiếm DVD..." aria-label="Tìm kiếm DVD">
+        <button type="submit" aria-label="Tìm kiếm"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
 
     <div class="top-actions">
         <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
@@ -72,7 +72,9 @@
             </tr>
             {{else}}
             <tr>
-                <td colspan="6" style="text-align:center; color: var(--muted);">Chưa có DVD nào.</td>
+                <td colspan="6" style="text-align:center; color: var(--muted);">
+                    {{#if q}}Không tìm thấy DVD phù hợp.{{else}}Chưa có DVD nào.{{/if}}
+                </td>
             </tr>
             {{/each}}
         </tbody>

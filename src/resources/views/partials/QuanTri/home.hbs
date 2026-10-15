@@ -1,5 +1,9 @@
 <header class="topbar">
-  <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Tìm kiếm DVD..." /></div>
+  <form class="search" method="GET" action="/admin/products">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" name="q" placeholder="Tìm kiếm DVD..." aria-label="Tìm kiếm DVD">
+    <button type="submit" aria-label="Tìm kiếm"><i class="fa-solid fa-arrow-right"></i></button>
+  </form>
   <div class="top-actions">
     <div class="user-card"><div class="avatar">{{initial currentUser.username}}</div>
       <div><div class="user-name">{{currentUser.username}}</div><small>Admin</small></div></div>

@@ -20,6 +20,11 @@ router.use((req, res, next) => {
 router.get("/dashboard", quantriController.dashboard);
 router.get("/reports", quantriController.reports);
 router.get("/users", quantriController.users);
+router.get("/users/add", quantriController.addUser);
+router.post("/users", quantriController.createUser);
+router.get("/users/:id/edit", quantriController.editUser);
+router.post("/users/:id/edit", quantriController.updateUser);
+router.post("/users/:id/delete", quantriController.deleteUser);
 router.get("/products", quantriController.products);
 router.get("/products/add", quantriController.addProduct);
 router.post("/products", quantriController.createProduct);

@@ -13,12 +13,17 @@ const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 class ProductController {
   async index(req, res) {
     try {
-      const q = (req.query.q || "").trim();
-      const cat = req.query.cat || "";
-      const sort = SORTS[req.query.sort] ? req.query.sort : "newest";
+      const q = typeof req.query.q === "string" ? req.query.q.trim() : "";
+      const cat = typeof req.query.cat === "string" ? req.query.cat : "";
+      const requestedSort =
+        typeof req.query.sort === "string" ? req.query.sort : "";
+      const sort = SORTS[requestedSort] ? requestedSort : "newest";
 
       const filter = { isActive: { $ne: false } };
-      if (q) filter.name = { $regex: escapeRegex(q), $options: "i" };
+      if (q) {
+        const searchPattern = { $regex: escapeRegex(q), $options: "i" };
+        filter.$or = [{ name: searchPattern }, { director: searchPattern }];
+      }
       if (/^[a-f\d]{24}$/i.test(cat)) filter.categoryId = cat;
 
       const [products, categories] = await Promise.all([

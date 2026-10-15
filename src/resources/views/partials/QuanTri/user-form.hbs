@@ -1,0 +1,57 @@
+<div class="admin-product-page">
+  <header class="topbar admin-product-heading">
+    <div>
+      <p class="admin-product-kicker">Quản lý khách hàng</p>
+      <h1>{{#if isEdit}}Sửa khách hàng{{else}}Thêm khách hàng{{/if}}</h1>
+    </div>
+    <a class="admin-form-button admin-form-button--secondary" href="/admin/users">
+      <i class="fa-solid fa-arrow-left"></i> Danh sách khách hàng
+    </a>
+  </header>
+
+  <section class="table-panel">
+    {{#if error}}<p class="admin-form-error" role="alert">{{error}}</p>{{/if}}
+    <form class="admin-product-form" method="POST" action="{{#if isEdit}}/admin/users/{{user._id}}/edit{{else}}/admin/users{{/if}}">
+      <div class="admin-form-grid">
+        <label class="admin-form-field">
+          Tên đăng nhập
+          <input name="username" value="{{user.username}}" required maxlength="80" autocomplete="username">
+        </label>
+        <label class="admin-form-field">
+          Email
+          <input type="email" name="email" value="{{user.email}}" required autocomplete="email">
+        </label>
+        <label class="admin-form-field">
+          Họ và tên
+          <input name="fullName" value="{{user.fullName}}" autocomplete="name">
+        </label>
+        <label class="admin-form-field">
+          Số điện thoại
+          <input name="phone" value="{{user.phone}}" autocomplete="tel">
+        </label>
+        <label class="admin-form-field admin-form-field--wide">
+          Địa chỉ
+          <textarea name="address" autocomplete="street-address">{{user.address}}</textarea>
+        </label>
+        <label class="admin-form-field">
+          {{#if isEdit}}Mật khẩu mới (để trống nếu không đổi){{else}}Mật khẩu{{/if}}
+          <input type="password" name="password" {{#unless isEdit}}required{{/unless}} minlength="6" autocomplete="{{#if isEdit}}new-password{{else}}new-password{{/if}}">
+        </label>
+      </div>
+
+      <div class="admin-form-checks">
+        <label class="admin-form-check">
+          <input type="checkbox" name="isActive" {{#if user.isActive}}checked{{/if}}>
+          Tài khoản hoạt động
+        </label>
+      </div>
+
+      <div class="admin-form-actions">
+        <button class="admin-form-button admin-form-submit" type="submit">
+          <i class="fa-solid fa-floppy-disk"></i> {{#if isEdit}}Lưu thay đổi{{else}}Tạo khách hàng{{/if}}
+        </button>
+        <a class="admin-form-button admin-form-button--secondary" href="/admin/users">Hủy</a>
+      </div>
+    </form>
+  </section>
+</div>

@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const Product = require("../models/ProductModel");
 const Cart = require("../models/CartModel");
 const User = require("../models/UserModel");
 const Order = require("../models/OrderModel");
 const Category = require("../models/CategoryModel");
+
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 function productInput(body) {
   const name = String(body.name || "").trim();
@@ -229,10 +232,25 @@ class QuanTriController {
 
   async users(req, res) {
     try {
-      const users = await User.find().lean();
+      const q = typeof req.query.q === "string" ? req.query.q.trim() : "";
+      const filter = { role: { $ne: "admin" } };
+      if (q) {
+        const searchPattern = { $regex: escapeRegex(q), $options: "i" };
+        filter.$or = [
+          { username: searchPattern },
+          { fullName: searchPattern },
+          { email: searchPattern },
+        ];
+      }
+      const users = (await User.find(filter)
+        .select("-password")
+        .sort({ createdAt: -1 })
+        .lean()).map((user) => ({ ...user, _id: String(user._id) }));
       return res.render("partials/QuanTri/users", {
         layout: "admin/DashBoard",
         users,
+        q,
+        currentUserId: String(req.session.userId || ""),
       });
     } catch (error) {
       console.error("Không thể tải danh sách khách hàng:", error.message);
@@ -240,12 +258,173 @@ class QuanTriController {
     }
   }
 
+  async addUser(req, res) {
+    return res.render("partials/QuanTri/user-form", {
+      layout: "admin/DashBoard",
+      user: {
+        username: "",
+        email: "",
+        fullName: "",
+        phone: "",
+        address: "",
+        isActive: true,
+      },
+      isEdit: false,
+    });
+  }
+
+  async createUser(req, res) {
+    const formUser = {
+      username: typeof req.body.username === "string" ? req.body.username.trim() : "",
+      email: typeof req.body.email === "string" ? req.body.email.trim().toLowerCase() : "",
+      fullName: typeof req.body.fullName === "string" ? req.body.fullName.trim() : "",
+      phone: typeof req.body.phone === "string" ? req.body.phone.trim() : "",
+      address: typeof req.body.address === "string" ? req.body.address.trim() : "",
+      isActive: req.body.isActive === "on",
+    };
+    const renderError = (message, status) =>
+      res.status(status).render("partials/QuanTri/user-form", {
+        layout: "admin/DashBoard",
+        user: formUser,
+        isEdit: false,
+        error: message,
+      });
+
+    try {
+      const password =
+        typeof req.body.password === "string" ? req.body.password : "";
+      if (!formUser.username || !formUser.email || !password) {
+        return renderError("Vui lòng nhập tên đăng nhập, email và mật khẩu.", 400);
+      }
+      if (password.length < 6) {
+        return renderError("Mật khẩu phải có ít nhất 6 ký tự.", 400);
+      }
+
+      const passwordHash = await bcrypt.hash(password, 10);
+      await User.create({
+        ...formUser,
+        password: passwordHash,
+        role: "user",
+        isActive: req.body.isActive === "on",
+      });
+      return res.redirect("/admin/users");
+    } catch (error) {
+      if (error.code === 11000) {
+        return renderError("Tên đăng nhập hoặc email đã được sử dụng.", 409);
+      }
+      console.error("Không thể thêm khách hàng:", error.message);
+      return res.status(500).send("Không thể thêm khách hàng");
+    }
+  }
+
+  async editUser(req, res) {
+    try {
+      if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(404).send("Không tìm thấy khách hàng");
+      }
+      const user = await User.findOne({
+        _id: req.params.id,
+        role: { $ne: "admin" },
+      })
+        .select("-password")
+        .lean();
+      if (!user) return res.status(404).send("Không tìm thấy khách hàng");
+
+      return res.render("partials/QuanTri/user-form", {
+        layout: "admin/DashBoard",
+        user,
+        isEdit: true,
+      });
+    } catch (error) {
+      console.error("Không thể tải khách hàng:", error.message);
+      return res.status(500).send("Không thể tải khách hàng");
+    }
+  }
+
+  async updateUser(req, res) {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(404).send("Không tìm thấy khách hàng");
+    }
+
+    const formUser = {
+      _id: req.params.id,
+      username: typeof req.body.username === "string" ? req.body.username.trim() : "",
+      email: typeof req.body.email === "string" ? req.body.email.trim().toLowerCase() : "",
+      fullName: typeof req.body.fullName === "string" ? req.body.fullName.trim() : "",
+      phone: typeof req.body.phone === "string" ? req.body.phone.trim() : "",
+      address: typeof req.body.address === "string" ? req.body.address.trim() : "",
+      isActive: req.body.isActive === "on",
+    };
+    const renderError = (message, status) =>
+      res.status(status).render("partials/QuanTri/user-form", {
+        layout: "admin/DashBoard",
+        user: formUser,
+        isEdit: true,
+        error: message,
+      });
+
+    try {
+      if (!formUser.username || !formUser.email) {
+        return renderError("Vui lòng nhập tên đăng nhập và email.", 400);
+      }
+
+      const update = { ...formUser };
+      delete update._id;
+      const password =
+        typeof req.body.password === "string" ? req.body.password : "";
+      if (password) {
+        if (password.length < 6) {
+          return renderError("Mật khẩu phải có ít nhất 6 ký tự.", 400);
+        }
+        update.password = await bcrypt.hash(password, 10);
+      }
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.id, role: { $ne: "admin" } },
+        { $set: update },
+        { new: true, runValidators: true },
+      );
+      if (!user) return res.status(404).send("Không tìm thấy khách hàng");
+      return res.redirect("/admin/users");
+    } catch (error) {
+      if (error.code === 11000) {
+        return renderError("Tên đăng nhập hoặc email đã được sử dụng.", 409);
+      }
+      console.error("Không thể cập nhật khách hàng:", error.message);
+      return res.status(500).send("Không thể cập nhật khách hàng");
+    }
+  }
+
+  async deleteUser(req, res) {
+    try {
+      if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(404).send("Không tìm thấy khách hàng");
+      }
+      if (String(req.session.userId || "") === req.params.id) {
+        return res.status(403).send("Bạn không thể xóa tài khoản đang đăng nhập");
+      }
+      const user = await User.findOneAndDelete({
+        _id: req.params.id,
+        role: { $ne: "admin" },
+      });
+      if (!user) return res.status(404).send("Không tìm thấy khách hàng");
+      await Cart.deleteMany({ userId: user._id });
+      return res.redirect("/admin/users");
+    } catch (error) {
+      console.error("Không thể xóa khách hàng:", error.message);
+      return res.status(500).send("Không thể xóa khách hàng");
+    }
+  }
+
   async products(req, res) {
     try {
-      const products = await Product.find().populate("categoryId").lean();
+      const q = typeof req.query.q === "string" ? req.query.q.trim() : "";
+      const filter = q ? { name: { $regex: escapeRegex(q), $options: "i" } } : {};
+      const products = await Product.find(filter).populate("categoryId").lean();
       return res.render("partials/QuanTri/crud/products", {
         layout: "admin/DashBoard",
         products,
+        q,
       });
     } catch (error) {
       console.error("Không thể tải danh sách DVD:", error.message);

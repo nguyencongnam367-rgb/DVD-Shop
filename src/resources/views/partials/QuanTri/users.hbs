@@ -1,8 +1,9 @@
 <header class="topbar">
-    <div class="search">
+    <form class="search" method="GET" action="/admin/users">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Tìm kiếm khách hàng..."></input>
-    </div>
+        <input type="search" name="q" value="{{q}}" placeholder="Tìm kiếm khách hàng..." aria-label="Tìm kiếm khách hàng">
+        <button type="submit" aria-label="Tìm kiếm"><i class="fa-solid fa-arrow-right"></i></button>
+    </form>
 
     <div class="top-actions">
         <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
@@ -20,7 +21,7 @@
 <section class="table-panel" style="margin-top: 24px;">
     <div class="panel-head">
         <span>Danh sách khách hàng</span>
-        <button class="admin-action-button">+ Thêm mới</button>
+        <a class="admin-form-button" href="/admin/users/add"><i class="fa-solid fa-plus"></i> Thêm mới</a>
     </div>
 
     <table>
@@ -53,11 +54,20 @@
                     <span class="pill yellow">Bị khoá</span>
                     {{/if}}
                 </td>
-                <td><a href="/admin/users/{{this._id}}/edit" style="color: var(--primary); font-weight: 700;">Sửa</a></td>
+                <td class="admin-product-actions">
+                    <a class="admin-table-action" href="/admin/users/{{this._id}}/edit">Sửa</a>
+                    {{#unless (eq this._id ../currentUserId)}}
+                    <form method="POST" action="/admin/users/{{this._id}}/delete" onsubmit="return confirm('Bạn có chắc muốn xóa khách hàng này?');">
+                        <button class="admin-table-action admin-table-action--delete" type="submit">Xóa</button>
+                    </form>
+                    {{/unless}}
+                </td>
             </tr>
             {{else}}
             <tr>
-                <td colspan="5" style="text-align:center; color: var(--muted);">Chưa có khách hàng nào.</td>
+                <td colspan="5" style="text-align:center; color: var(--muted);">
+                    {{#if q}}Không tìm thấy khách hàng phù hợp.{{else}}Chưa có khách hàng nào.{{/if}}
+                </td>
             </tr>
             {{/each}}
         </tbody>

@@ -197,6 +197,18 @@ a {
   color: var(--muted);
 }
 
+.search button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.search button:hover {
+  color: var(--primary);
+}
+
 .search input {
   border: none;
   outline: none;
