@@ -1,8 +1,8 @@
 <header class="topbar">
-    <div class="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Tìm kiếm đơn hàng..."></input>
-    </div>
+    <form class="search" method="GET" action="/admin/orders">
+        <button type="submit" aria-label="Tìm kiếm đơn hàng"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="search" name="q" value="{{q}}" placeholder="Tìm mã đơn hoặc tên khách hàng..." aria-label="Tìm mã đơn hoặc tên khách hàng">
+    </form>
 
     <div class="top-actions">
         <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
@@ -70,7 +70,7 @@
             </tr>
             {{else}}
             <tr>
-                <td colspan="6" style="text-align:center; color: var(--muted);">Chưa có đơn hàng nào.</td>
+                <td colspan="6" style="text-align:center; color: var(--muted);">{{#if q}}Không tìm thấy đơn hàng phù hợp.{{else}}Chưa có đơn hàng nào.{{/if}}</td>
             </tr>
             {{/each}}
         </tbody>

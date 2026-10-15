@@ -549,13 +549,37 @@ class QuanTriController {
 
   async orders(req, res) {
     try {
-      const orders = await Order.find()
+      const q = String(req.query.q || "").trim();
+      const orderFilter = {};
+
+      if (q) {
+        const namePattern = { $regex: escapeRegex(q), $options: "i" };
+        const orderCodeQuery = q.replace(/^#\s*/, "");
+        const matchingUsers = await User.find({ fullName: namePattern })
+          .select("_id")
+          .lean();
+        orderFilter.$or = [
+          { receiverName: namePattern },
+          { userId: { $in: matchingUsers.map((user) => user._id) } },
+        ];
+        if (orderCodeQuery) {
+          orderFilter.$or.unshift({
+            orderCode: {
+              $regex: escapeRegex(orderCodeQuery),
+              $options: "i",
+            },
+          });
+        }
+      }
+
+      const orders = await Order.find(orderFilter)
         .populate("userId")
         .sort({ createdAt: -1 })
         .lean();
       return res.render("partials/QuanTri/orders", {
         layout: "admin/DashBoard",
         orders,
+        q,
         orderNotice:
           req.query.result === "approved"
             ? "Đã xác nhận đơn hàng và chuyển sang trạng thái đang giao."
